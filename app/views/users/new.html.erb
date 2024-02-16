@@ -1,9 +1,49 @@
-<h1>New user</h1>
+<!-- app/views/users/new.html.erb -->
+<h1>Sign Up</h1>
 
-<%= render "form", user: @user %>
+<%= form_with model: @user, local: true do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-<br>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :user_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email, id: :user_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :user_password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation, "Confirm Password" %>
+    <%= form.password_field :password_confirmation, id: :user_password_confirmation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.telephone_field :phone, id: :user_phone %>
+  </div>
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :user_address %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Sign Up" %>
+  </div>
+<% end %>
