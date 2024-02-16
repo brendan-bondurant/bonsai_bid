@@ -11,7 +11,15 @@
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
-#
+def sign_in
+  user = create(:user, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
+
+  visit login_path
+  fill_in "user_email", with: user.email
+  fill_in "user_password", with: "password"
+  click_button "Log in"
+end
+
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
