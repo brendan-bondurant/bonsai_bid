@@ -373,6 +373,9 @@
           1,
           1,
           1,
+          null,
+          1,
+          1,
           null
         ]
       },
@@ -392,6 +395,11 @@
           2,
           2,
           null,
+          null,
+          1,
+          2,
+          2,
+          null,
           null
         ]
       },
@@ -400,16 +408,24 @@
           1,
           1,
           1,
+          1,
+          1,
           null
         ]
       },
       "/Users/brendanbondurant/personal/david_startup/david_monolith/spec/models/feedback_spec.rb": {
         "lines": [
-          null,
           1,
           null,
           1,
           1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
           2,
           2,
           2,
@@ -420,6 +436,10 @@
       "/Users/brendanbondurant/personal/david_startup/david_monolith/app/models/feedback.rb": {
         "lines": [
           1,
+          1,
+          1,
+          1,
+          null,
           1,
           1,
           1,
@@ -438,6 +458,29 @@
           2,
           2,
           null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          2,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -445,10 +488,30 @@
         "lines": [
           1,
           1,
+          null,
           1,
           1,
           1,
           1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          14,
+          null,
           null
         ]
       },
@@ -464,11 +527,34 @@
           2,
           2,
           null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          2,
+          2,
+          null,
+          2,
+          null,
+          2,
+          2,
+          2,
+          2,
+          null,
           null
         ]
       },
       "/Users/brendanbondurant/personal/david_startup/david_monolith/app/models/user.rb": {
         "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
           1,
           1,
           1,
@@ -499,6 +585,6 @@
         ]
       }
     },
-    "timestamp": 1708102149
+    "timestamp": 1708104653
   }
 }
