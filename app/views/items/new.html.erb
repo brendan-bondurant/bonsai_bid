@@ -1,9 +1,51 @@
 <h1>New item</h1>
 
-<%= render "form", item: @item %>
+<!-- app/views/items/new.html.erb -->
 
-<br>
+<%= form_with model: @item, local: true do |form| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-<div>
-  <%= link_to "Back to items", items_path %>
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :item_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :item_description %>
+  </div>
+
+  <div class="field">
+  <%= form.label :category_id %>
+  <%= form.select :category_id, Category.all.map { |category| [category.name, category.id] }, {}, { id: :item_category_id, include_blank: "Select Category" } %>
 </div>
+
+  <div class="field">
+    <%= form.label :starting_price %>
+    <%= form.text_field :starting_price, id: :item_starting_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.datetime_field :start_date, id: :item_start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.datetime_field :end_date, id: :item_end_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Item" %>
+  </div>
+<% end %>

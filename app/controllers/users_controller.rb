@@ -46,6 +46,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def login
+    user = User.find_by(email: params[:email])
+    if user.nil?
+      flash[:error] = "Sorry, we are unable to find a user with this e-mail. Please check credentials or create an account."
+      redirect_to login_path
+    elsif user.authenticate(params[:password])
+      session[:user_id] = user.id
+      flash[:success] = "Signed in successfully."
+      redirect_to user_url(user), notice: "Signed in successfully."
+    else
+      require 'pry'; binding.pry
+      flash[:error] = "Sorry, your credentials are bad."
+      render :login_form
+    end
+  end
+
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy!
