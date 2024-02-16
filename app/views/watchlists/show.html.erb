@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @watchlist %>
+
+<div>
+  <%= link_to "Edit this watchlist", edit_watchlist_path(@watchlist) %> |
+  <%= link_to "Back to watchlists", watchlists_path %>
+
+  <%= button_to "Destroy this watchlist", @watchlist, method: :delete %>
+</div>
