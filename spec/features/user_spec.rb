@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
+  let!(:test_user) { create(:user, email: "testuser@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user") }
+
+  
   scenario "User signs up with valid information" do
     visit new_user_registration_path
-    
     fill_in "user_email", with: "test@example.com"
     fill_in "user_password", with: "password123"
     fill_in "user_password_confirmation", with: "password123"
@@ -58,12 +60,12 @@ RSpec.feature "Users", type: :feature do
   end
 
   scenario "User updates profile with valid information" do
-    sign_in
+    sign_in test_user
     visit edit_user_registration_path
-    fill_in "user_mail", with: "new_email@example.com"
-    fill_in "Current password", with: user.password
-    click_button "Update"
+    fill_in "user_email", with: "new_email@example.com"
 
+    fill_in "user_current_password", with: test_user.password
+    click_button "Update"
     expect(page).to have_text("Your account has been updated successfully.")
   end
 

@@ -11,7 +11,7 @@
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
-def sign_in
+def sign_in_w_form
   @user = create(:user, id: 123, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
 
   visit new_user_session_path
@@ -21,7 +21,7 @@ def sign_in
 end
 
 def user_with_items
-  sign_in
+  sign_in_w_form
   category = create(:category)  
   @item1 = Item.create!(
     id: 123,
