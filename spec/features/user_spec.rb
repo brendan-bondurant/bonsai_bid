@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
-  let!(:test_user) { create(:user, email: "testuser@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user") }
+  let!(:test_user) { create(:user, id: 1000, email: "testuser@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user") }
 
   
   scenario "User signs up with valid information" do
@@ -62,6 +62,7 @@ RSpec.feature "Users", type: :feature do
   scenario "User updates profile with valid information" do
     sign_in test_user
     visit edit_user_registration_path
+    save_and_open_page
     fill_in "user_email", with: "new_email@example.com"
     fill_in "user_current_password", with: test_user.password
     click_button "Update"
@@ -83,7 +84,34 @@ RSpec.feature "Users", type: :feature do
     sign_in test_user
     visit edit_user_registration_path
     click_button "Cancel my account"
-    save_and_open_page
     expect(page).to have_text("Bye! Your account has been successfully cancelled. We hope to see you again soon.")
+  end
+
+  scenario "User updates phone number and address with valid information" do
+    sign_in test_user
+    visit edit_user_path(test_user)
+
+    fill_in "Phone", with: "1234567890"
+    fill_in "Address", with: "123 Main Street"
+
+    click_button "Update User"
+
+    expect(page).to have_text("User was successfully updated.")
+    expect(user.reload.phone).to eq("1234567890")
+    expect(user.reload.address).to eq("123 Main Street")
+  end
+
+  scenario "User updates phone number and address with invalid information" do
+    sign_in test_user
+    visit edit_user_path(test_user)
+
+    fill_in "Phone", with: "" # Invalid phone number
+    fill_in "Address", with: "" # Invalid address
+
+    click_button "Update User"
+
+    expect(page).to have_text("2 errors prohibited this user from being saved:")
+    expect(page).to have_text("Phone can't be blank")
+    expect(page).to have_text("Address can't be blank")
   end
 end
