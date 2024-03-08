@@ -63,31 +63,27 @@ RSpec.feature "Users", type: :feature do
     sign_in test_user
     visit edit_user_registration_path
     fill_in "user_email", with: "new_email@example.com"
-
     fill_in "user_current_password", with: test_user.password
     click_button "Update"
     expect(page).to have_text("Your account has been updated successfully.")
   end
 
-  # scenario "User updates profile with invalid information" do
+  scenario "User updates profile with invalid information" do
 
-  #   sign_in
-  #   visit edit_user_registration_path
-  #   fill_in "Email", with: "invalid_email"
-  #   fill_in "Current password", with: user.password
-  #   click_button "Update"
+    sign_in test_user
+    visit edit_user_registration_path
+    fill_in "user_email", with: "invalid_email"
+    fill_in "user_current_password", with: test_user.password
+    click_button "Update"
+    expect(page).to have_text("1 error prohibited this user from being saved:")
+    expect(page).to have_text("Email is invalid")
+  end
 
-  #   expect(page).to have_text("Please review the problems below:")
-  #   expect(page).to have_text("Email is invalid")
-  # end
-
-  # scenario "User deletes account" do
-  #   user = create(:user)
-
-  #   sign_in user
-  #   visit edit_user_registration_path
-  #   click_button "Cancel my account"
-
-  #   expect(page).to have_text("Bye! Your account has been successfully cancelled. We hope to see you again soon.")
-  # end
+  scenario "User deletes account" do
+    sign_in test_user
+    visit edit_user_registration_path
+    click_button "Cancel my account"
+    save_and_open_page
+    expect(page).to have_text("Bye! Your account has been successfully cancelled. We hope to see you again soon.")
+  end
 end
