@@ -34,6 +34,11 @@
     <%= form.label :starting_price %>
     <%= form.text_field :starting_price, id: :item_starting_price %>
   </div>
+  
+  <div class="field">
+    <%= form.label :buy_it_now_price %>
+    <%= form.text_field :buy_it_now_price, id: :item_buy_it_now_price %>
+  </div>
 
   <div class="field">
     <%= form.label :start_date %>
@@ -48,4 +53,5 @@
   <div class="actions">
     <%= form.submit "Create Item" %>
   </div>
+
 <% end %>

@@ -22,7 +22,8 @@ class ItemsController < ApplicationController
   # POST /items or /items.json
   def create
     @item = Item.new(item_params)
-
+    @item.current_price = @item.starting_price
+    require 'pry'; binding.pry
     respond_to do |format|
       if @item.save
         format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
