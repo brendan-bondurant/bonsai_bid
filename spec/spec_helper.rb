@@ -12,12 +12,56 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 def sign_in
-  user = create(:user, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
+  @user = create(:user, id: 123, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
 
-  visit login_path
-  fill_in "user_email", with: user.email
+  visit new_user_session_path
+  fill_in "user_email", with: @user.email
   fill_in "user_password", with: "password"
   click_button "Log in"
+end
+
+def user_with_items
+  sign_in
+  category = create(:category)  
+  @item1 = Item.create!(
+    id: 123,
+    name: "Test Item 1",
+    description: "Description for Test Item 1",
+    starting_price: 10.00,
+    current_price: 10.00,
+    buy_it_now_price: 30.00,
+    category: category,
+    seller: @user,
+    start_date: Date.today,
+    end_date: Date.today + 2.days
+  )
+
+  @item2 = Item.create!(
+    id: 124,
+    name: "Test Item 2",
+    description: "Description for Test Item 2",
+    starting_price: 15.00,
+    current_price: 15.00,
+    buy_it_now_price: 35.00,
+    category: category,
+    seller: @user,
+    start_date: Date.today,
+    end_date: Date.today + 7.days
+  )
+
+  @item3 = Item.create!(
+    id: 125,
+    name: "Test Item 3",
+    description: "Description for Test Item 3",
+    starting_price: 20.00,
+    current_price: 20.00,
+    buy_it_now_price: 40.00,
+    category: category,
+    seller: @user,
+    start_date: Date.today,
+    end_date: Date.today + 10.days
+  )
+  
 end
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
