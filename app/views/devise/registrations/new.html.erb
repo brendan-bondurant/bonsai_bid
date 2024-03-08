@@ -1,22 +1,21 @@
-<!-- app/views/devise/registrations/new.html.erb -->
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <!-- Name Field -->
+  <!-- Name -->
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 
-  <!-- Email Field -->
+  <!-- Email -->
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
-  <!-- Password Field -->
+  <!-- Password -->
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
@@ -25,19 +24,19 @@
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
-  <!-- Password Confirmation Field -->
+  <!-- Password Confirmation -->
   <div class="field">
     <%= f.label :password_confirmation, "Confirm Password" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <!-- Phone Field -->
+  <!-- Phone -->
   <div class="field">
     <%= f.label :phone %><br />
     <%= f.telephone_field :phone, autocomplete: "tel" %>
   </div>
 
-  <!-- Address Field -->
+  <!-- Address -->
   <div class="field">
     <%= f.label :address %><br />
     <%= f.text_field :address, autocomplete: "street-address" %>

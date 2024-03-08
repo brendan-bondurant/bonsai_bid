@@ -21,16 +21,16 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
-    @item.current_price = @item.starting_price
-    require 'pry'; binding.pry
+    item = Item.new(item_params)
+    item.current_price = item.starting_price
+    item.seller_id = current_user.id
     respond_to do |format|
-      if @item.save
-        format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
-        format.json { render :show, status: :created, location: @item }
+      if item.save
+        format.html { redirect_to item_url(item), notice: "Item was successfully created." }
+        format.json { render :show, status: :created, location: item }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        format.json { render json: item.errors, status: :unprocessable_entity }
       end
     end
   end

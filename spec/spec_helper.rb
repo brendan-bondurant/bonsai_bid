@@ -14,7 +14,7 @@
 def sign_in
   user = create(:user, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
 
-  visit login_path
+  visit new_user_session_path
   fill_in "user_email", with: user.email
   fill_in "user_password", with: "password"
   click_button "Log in"
