@@ -48,22 +48,28 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_text("Invalid Email or password.")
   end
 
-  # scenario "User updates profile with valid information" do
-  #   user = create(:user)
+  scenario "User views their items" do
+    user_with_items
 
-  #   sign_in user
-  #   visit edit_user_registration_path
-  #   fill_in "user_mail", with: "new_email@example.com"
-  #   fill_in "Current password", with: user.password
-  #   click_button "Update"
+    visit user_path(@user.id)
+    expect(page).to have_text(@item1.name)
+    expect(page).to have_text(@item2.name)
+    expect(page).to have_text(@item3.name)
+  end
 
-  #   expect(page).to have_text("Your account has been updated successfully.")
-  # end
+  scenario "User updates profile with valid information" do
+    sign_in
+    visit edit_user_registration_path
+    fill_in "user_mail", with: "new_email@example.com"
+    fill_in "Current password", with: user.password
+    click_button "Update"
+
+    expect(page).to have_text("Your account has been updated successfully.")
+  end
 
   # scenario "User updates profile with invalid information" do
-  #   user = create(:user)
 
-  #   sign_in user
+  #   sign_in
   #   visit edit_user_registration_path
   #   fill_in "Email", with: "invalid_email"
   #   fill_in "Current password", with: user.password
