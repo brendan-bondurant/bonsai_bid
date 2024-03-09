@@ -3,5 +3,9 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { 'password' } 
     password_confirmation { 'password' } 
+    id {124}
+    phone {"1234567890"} 
+    address {"123 main street"} 
+    name {"user"}
   end
 end

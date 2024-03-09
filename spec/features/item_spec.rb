@@ -32,6 +32,83 @@ RSpec.feature "Items", type: :feature do
     expect(page).to have_text(@item1.end_date)
     expect(page).to have_text(@item1.status)
   end
+  
+  scenario "User updates an existing item" do
+    user_with_items
+    visit edit_item_path(@item2)
+    fill_in "Name", with: "Updated Name"
+    select 'Active', from: 'Status'
+    click_button "Update Item"
 
+    expect(page).to have_content("Item was successfully updated.")
+    expect(page).to have_content("Updated Name")
+  end
 
+  scenario "User deletes an item" do
+    user_with_items
+    visit item_path(@item2)
+    click_link "Remove #{(@item2.name)}"
+    expect(current_path).to eq(items_path)
+
+    expect(page).to have_content("Item was successfully destroyed.")
+    expect(page).not_to have_content(@item2.name)
+  end
+
+  scenario "User submits invalid update data" do
+    user_with_items
+    visit edit_item_path(@item2)
+    fill_in "Name", with: "" 
+    click_button "Update Item"
+    
+    
+    expect(page).to have_content("Name can't be blank") 
+    expect(@item2.reload.name).to eq(@item2.name) 
+  end
+
+  scenario "Unauthorized user attempts to update item" do
+    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user_with_items
+  category = create(:category)
+  item = Item.create!(
+    id: 126,
+    name: "Test Item 4",
+    description: "Bonsai Tree",
+    starting_price: 20.00,
+    current_price: 20.00,
+    buy_it_now_price: 40.00,
+    category: category,
+    seller: user1,
+    status: 'listed',
+    start_date: Date.today,
+    end_date: Date.today + 10.days
+  )
+    visit edit_item_path(item)
+    
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("You are not authorized to perform this action.") # Custom authorization failure message
+  end
+
+  scenario "Unauthenticated user views an item" do
+    visit item_path(item)
+    expect(page).to have_content(item.name)
+    expect(page).to_not have_link('Edit')
+    expect(page).to_not have_link('Delete')
+  end
+
+  scenario "Authenticated user who is not the seller views an item" do
+    non_seller = FactoryBot.create(:user)
+    login_as(non_seller, scope: :user)
+    visit item_path(item)
+    expect(page).to have_content(item.name)
+    expect(page).to_not have_link('Edit')
+    expect(page).to_not have_link('Delete')
+  end
+
+  scenario "Authenticated seller views their item" do
+    login_as(item.seller, scope: :user)
+    visit item_path(item)
+    expect(page).to have_content(item.name)
+    expect(page).to have_link('Edit')
+    expect(page).to have_link('Delete')
+  end
 end

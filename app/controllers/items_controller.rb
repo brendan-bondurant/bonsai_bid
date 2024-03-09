@@ -2,9 +2,9 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy ]
 
   # GET /items or /items.json
-  # def index
-  #   @items = Item.all
-  # end
+  def index
+    @items = Item.all
+  end
 
   # GET /items/1 or /items/1.json
   def show
@@ -19,6 +19,10 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    if current_user.id != @item.seller_id
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to root_path
+    end
   end
 
   # POST /items or /items.json
@@ -44,6 +48,7 @@ class ItemsController < ApplicationController
         format.html { redirect_to item_url(@item), notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else
+        @item.reload #Remove if you want it to stay with the incorrect data
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
@@ -61,13 +66,11 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def item_params
-      params.require(:item).permit(:seller_id, :category_id, :name, :description, :images, :starting_price, :current_price, :buy_it_now_price, :start_date, :end_date, :status)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item
+    @item = Item.find(params[:id])
+  end
+  def item_params
+    params.require(:item).permit(:seller_id, :category_id, :name, :description, :starting_price, :current_price, :buy_it_now_price, :start_date, :end_date, :status)
+  end
 end

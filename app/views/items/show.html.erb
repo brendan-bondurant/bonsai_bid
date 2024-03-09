@@ -7,5 +7,5 @@ Category :<%= @category.name %>
   <%= link_to "Edit this item", edit_item_path(@item) %> |
   <%= link_to "Back to items", items_path %>
 
-  <%= button_to "Destroy this item", @item, method: :delete %>
+  <%= link_to "Remove #{@item.name}", @item, method: :delete %>
 </div>

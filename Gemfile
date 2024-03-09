@@ -81,5 +81,6 @@ group :test do
   gem 'vcr'
   gem 'simplecov'
   gem 'shoulda-matchers', '~> 6.0'
+  gem 'rails-controller-testing'
 end
 

@@ -61,10 +61,10 @@
     <%= form.datetime_field :end_date %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
+<div>
+  <%= form.label :status, style: "display: block" %>
+  <%= form.select :status, Item.statuses.keys.map { |status| [status.titleize, status] }, {}, {class: "form-control"} %>
+</div>
 
   <div>
     <%= form.submit %>

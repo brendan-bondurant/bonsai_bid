@@ -32,6 +32,7 @@ def user_with_items
     buy_it_now_price: 30.00,
     category: category,
     seller: @user,
+    status: 'listed',
     start_date: Date.today,
     end_date: Date.today + 2.days
   )
@@ -45,6 +46,7 @@ def user_with_items
     buy_it_now_price: 35.00,
     category: category,
     seller: @user,
+    status: 'listed',
     start_date: Date.today,
     end_date: Date.today + 7.days
   )
@@ -58,6 +60,7 @@ def user_with_items
     buy_it_now_price: 40.00,
     category: category,
     seller: @user,
+    status: 'listed',
     start_date: Date.today,
     end_date: Date.today + 10.days
   )
