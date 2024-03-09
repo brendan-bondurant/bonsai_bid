@@ -564,8 +564,8 @@
           null,
           1,
           1,
-          4,
-          4,
+          8,
+          8,
           null,
           1,
           1,
@@ -612,7 +612,7 @@
           1,
           1,
           1,
-          15,
+          19,
           1,
           1,
           1,
@@ -635,6 +635,8 @@
           1,
           1,
           null,
+          null,
+          1,
           null,
           1,
           1,
@@ -715,6 +717,60 @@
       "/Users/brendanbondurant/personal/david_startup/david_monolith/app/helpers/watchlists_helper.rb": {
         "lines": [
           1,
+          null
+        ]
+      },
+      "/Users/brendanbondurant/personal/david_startup/david_monolith/spec/features/search_spec.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
           null
         ]
       },
@@ -992,7 +1048,7 @@
           1,
           null,
           1,
-          22,
+          34,
           null,
           null
         ]
@@ -1079,6 +1135,19 @@
           null
         ]
       },
+      "/Users/brendanbondurant/personal/david_startup/david_monolith/spec/requests/items_spec.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/brendanbondurant/personal/david_startup/david_monolith/app/controllers/application_controller.rb": {
         "lines": [
           1,
@@ -1087,7 +1156,7 @@
           1,
           null,
           1,
-          21,
+          29,
           null,
           null
         ]
@@ -1096,7 +1165,6 @@
         "lines": [
           1,
           1,
-          null,
           null,
           null
         ]
@@ -1173,6 +1241,16 @@
           null,
           1,
           1,
+          null,
+          null
+        ]
+      },
+      "/Users/brendanbondurant/personal/david_startup/david_monolith/app/controllers/search_controller.rb": {
+        "lines": [
+          1,
+          1,
+          4,
+          4,
           null,
           null
         ]
@@ -1271,6 +1349,6 @@
         ]
       }
     },
-    "timestamp": 1709997882
+    "timestamp": 1710001633
   }
 }

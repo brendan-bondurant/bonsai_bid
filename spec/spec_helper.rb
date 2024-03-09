@@ -26,7 +26,7 @@ def user_with_items
   @item1 = Item.create!(
     id: 123,
     name: "Test Item 1",
-    description: "Description for Test Item 1",
+    description: "Bonsai bush",
     starting_price: 10.00,
     current_price: 10.00,
     buy_it_now_price: 30.00,
@@ -39,7 +39,7 @@ def user_with_items
   @item2 = Item.create!(
     id: 124,
     name: "Test Item 2",
-    description: "Description for Test Item 2",
+    description: "Book about stuff",
     starting_price: 15.00,
     current_price: 15.00,
     buy_it_now_price: 35.00,
@@ -52,7 +52,7 @@ def user_with_items
   @item3 = Item.create!(
     id: 125,
     name: "Test Item 3",
-    description: "Description for Test Item 3",
+    description: "Bonsai Tree",
     starting_price: 20.00,
     current_price: 20.00,
     buy_it_now_price: 40.00,
