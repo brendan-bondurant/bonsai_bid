@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :received_feedbacks, class_name: 'Feedback', foreign_key: 'to_user_id'
   has_many :watchlists
 
-
+  validates :address, presence: true
   validates :name, presence: true
-  validates :phone, format: { with: /\A\d{10}\z/, message: "must be a 10 digit number" }, allow_blank: true
+  validates :phone, format: { with: /\A\d{10}\z/, message: "must be a 10 digit number" }, presence: true
 end
