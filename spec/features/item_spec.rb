@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Items", type: :feature do
 
-  scenario "Merchant lists an item" do
+  scenario "User lists an item" do
     sign_in_w_form
     category = create(:category)  
     visit new_item_path

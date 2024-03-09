@@ -62,7 +62,6 @@ RSpec.feature "Users", type: :feature do
   scenario "User updates profile with valid information" do
     sign_in test_user
     visit edit_user_registration_path
-    save_and_open_page
     fill_in "user_email", with: "new_email@example.com"
     fill_in "user_current_password", with: test_user.password
     click_button "Update"
@@ -97,21 +96,22 @@ RSpec.feature "Users", type: :feature do
     click_button "Update User"
 
     expect(page).to have_text("User was successfully updated.")
-    expect(user.reload.phone).to eq("1234567890")
-    expect(user.reload.address).to eq("123 Main Street")
+    expect(test_user.reload.phone).to eq("1234567890")
+    expect(test_user.reload.address).to eq("123 Main Street")
   end
 
   scenario "User updates phone number and address with invalid information" do
     sign_in test_user
     visit edit_user_path(test_user)
+    
 
     fill_in "Phone", with: "" # Invalid phone number
     fill_in "Address", with: "" # Invalid address
 
     click_button "Update User"
-
-    expect(page).to have_text("2 errors prohibited this user from being saved:")
+    expect(page).to have_text("3 errors prohibited this user from being saved:")
     expect(page).to have_text("Phone can't be blank")
     expect(page).to have_text("Address can't be blank")
+    expect(page).to have_text("Phone must be a 10 digit number")
   end
 end

@@ -10,7 +10,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'validations' do
-    # Email
     it 'validates presence of email' do
       user = User.new(email: nil)
       expect(user).to be_invalid
@@ -18,17 +17,17 @@ RSpec.describe User, type: :model do
     end
 
     it 'validates uniqueness of email' do
-      existing_user = User.create!(name: 'test', email: 'test@example.com', password: 'password123', password_confirmation: 'password123')
+      existing_user = User.create!(id: 1, name: 'test', email: 'test@example.com', password: 'password123', address: '543 Main', phone: 1231231234, password_confirmation: 'password123')
       user = User.new(email: existing_user.email)
       expect(user).to be_invalid
       expect(user.errors[:email]).to include("has already been taken")
     end
 
     it 'validates format of email' do
-      valid_email_user = User.new(email: 'test@example.com', password: 'password123', name: 'Test User')
+      valid_email_user = User.new(email: 'test@example.com', password: 'password123', name: 'Test User', address: '543 Main', phone: 1231231234)
       expect(valid_email_user).to be_valid
 
-      invalid_email_user = User.new(email: 'invalid_email', password: 'password123', name: 'Test User')
+      invalid_email_user = User.new(email: 'invalid_email', password: 'password123', name: 'Test User', address: '543 Main', phone: 1231231234)
       expect(invalid_email_user).to be_invalid
       expect(invalid_email_user.errors[:email]).to include("is invalid")
     end
