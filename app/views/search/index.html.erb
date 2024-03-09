@@ -1,7 +1,7 @@
 <h1>Search Results</h1>
 <% if @results.present? %>
   <% @results.each do |result| %>
-    <%= result.name %> </br>
+    <%= link_to result.name, result %> </br>
     <%= result.description %> </br>
   <% end %>
   <% else %>
