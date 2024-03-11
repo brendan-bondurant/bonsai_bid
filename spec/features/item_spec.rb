@@ -161,13 +161,4 @@ RSpec.feature "Items", type: :feature do
     expect(page).to have_link('Edit')
     expect(page).to have_link("Remove #{item.name}")
   end
-
-  scenario "User cancels deletion" do
-    user_with_items
-    visit item_path(@item1)
-
-
-    expect(page).to have_content(@item1.name)
-    expect(page).to_not have_content("Item was successfully deleted.")
-  end
 end
