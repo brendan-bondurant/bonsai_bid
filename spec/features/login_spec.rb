@@ -41,8 +41,8 @@ RSpec.feature "UserLogins", type: :feature do
     click_button 'Log in'
 
     expect(page).to have_content('Invalid Email or password')
-    # Verify the user stays on the root page with the login form still displayed
-    expect(current_path).to eq(root_path)
+    # send to user sign in page
+    expect(current_path).to eq(new_user_session_path)
   end
   scenario "User can log in from the root page with valid credentials" do
     visit root_path
@@ -63,7 +63,7 @@ RSpec.feature "UserLogins", type: :feature do
     click_button 'Log in'
 
     expect(page).to have_content('Invalid Email or password')
-    # Verify the user stays on the root page with the login form still displayed
-    expect(current_path).to eq(root_path)
+    # Send to user sign in page
+    expect(current_path).to eq(new_user_session_path)
   end
 end

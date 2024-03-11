@@ -48,6 +48,7 @@ RSpec.feature "Items", type: :feature do
     user_with_items
     visit item_path(@item2)
     click_link "Remove #{(@item2.name)}"
+
     expect(current_path).to eq(items_path)
 
     expect(page).to have_content("Item was successfully destroyed.")
@@ -68,27 +69,43 @@ RSpec.feature "Items", type: :feature do
   scenario "Unauthorized user attempts to update item" do
     user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
     user_with_items
-  category = create(:category)
-  item = Item.create!(
-    id: 126,
-    name: "Test Item 4",
-    description: "Bonsai Tree",
-    starting_price: 20.00,
-    current_price: 20.00,
-    buy_it_now_price: 40.00,
-    category: category,
-    seller: user1,
-    status: 'listed',
-    start_date: Date.today,
-    end_date: Date.today + 10.days
-  )
+    category = create(:category)
+    item = Item.create!(
+      id: 126,
+      name: "Test Item 4",
+      description: "Bonsai Tree",
+      starting_price: 20.00,
+      current_price: 20.00,
+      buy_it_now_price: 40.00,
+      category: category,
+      seller: user1,
+      status: 'listed',
+      start_date: Date.today,
+      end_date: Date.today + 10.days
+    ) 
     visit edit_item_path(item)
     
     expect(current_path).to eq(root_path)
-    expect(page).to have_content("You are not authorized to perform this action.") # Custom authorization failure message
+    expect(page).to have_content("You are not authorized to perform this action.") 
   end
 
   scenario "Unauthenticated user views an item" do
+    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user_with_items
+    category = create(:category)
+    item = Item.create!(
+      id: 126,
+      name: "Test Item 4",
+      description: "Bonsai Tree",
+      starting_price: 20.00,
+      current_price: 20.00,
+      buy_it_now_price: 40.00,
+      category: category,
+      seller: user1,
+      status: 'listed',
+      start_date: Date.today,
+      end_date: Date.today + 10.days
+    ) 
     visit item_path(item)
     expect(page).to have_content(item.name)
     expect(page).to_not have_link('Edit')
@@ -96,6 +113,22 @@ RSpec.feature "Items", type: :feature do
   end
 
   scenario "Authenticated user who is not the seller views an item" do
+    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user_with_items
+    category = create(:category)
+    item = Item.create!(
+      id: 126,
+      name: "Test Item 4",
+      description: "Bonsai Tree",
+      starting_price: 20.00,
+      current_price: 20.00,
+      buy_it_now_price: 40.00,
+      category: category,
+      seller: user1,
+      status: 'listed',
+      start_date: Date.today,
+      end_date: Date.today + 10.days
+    ) 
     non_seller = FactoryBot.create(:user)
     login_as(non_seller, scope: :user)
     visit item_path(item)
@@ -105,10 +138,36 @@ RSpec.feature "Items", type: :feature do
   end
 
   scenario "Authenticated seller views their item" do
+    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user_with_items
+    category = create(:category)
+    item = Item.create!(
+      id: 126,
+      name: "Test Item 4",
+      description: "Bonsai Tree",
+      starting_price: 20.00,
+      current_price: 20.00,
+      buy_it_now_price: 40.00,
+      category: category,
+      seller: user1,
+      status: 'listed',
+      start_date: Date.today,
+      end_date: Date.today + 10.days
+    ) 
     login_as(item.seller, scope: :user)
     visit item_path(item)
+    
     expect(page).to have_content(item.name)
     expect(page).to have_link('Edit')
-    expect(page).to have_link('Delete')
+    expect(page).to have_link("Remove #{item.name}")
+  end
+
+  scenario "User cancels deletion" do
+    user_with_items
+    visit item_path(@item1)
+
+
+    expect(page).to have_content(@item1.name)
+    expect(page).to_not have_content("Item was successfully deleted.")
   end
 end

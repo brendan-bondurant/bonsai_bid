@@ -2,10 +2,10 @@
 
 <%= render @item %>
 Category :<%= @category.name %>
-
 <div>
+<% if current_user.id == @item.seller_id %>
   <%= link_to "Edit this item", edit_item_path(@item) %> |
-  <%= link_to "Back to items", items_path %>
-
   <%= link_to "Remove #{@item.name}", @item, method: :delete %>
+  <% end %> <br>
+  <%= link_to "Back to items", items_path %>
 </div>
