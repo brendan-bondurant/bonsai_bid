@@ -1,4 +1,29 @@
+<h1>Search</h1>
+
 <%= form_tag(search_path, method: :get) do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
   <%= submit_tag "Search" %>
+<% end %>
+
+<h2>Login</h2>
+
+<% if user_signed_in? %>
+  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<% else %>
+  <form action="<%= user_session_path %>" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div>
+      <label for="user_email">Email</label>
+      <input type="email" name="user[email]" id="user_email">
+    </div>
+    <div>
+      <label for="user_password">Password</label>
+      <input type="password" name="user[password]" id="user_password">
+    </div>
+    <div>
+      <input type="submit" value="Log in">
+    </div>
+  </form>
+  <%= link_to "Sign up", new_user_registration_path %> |
+  <%= link_to "Forgot your password?", new_user_password_path %>
 <% end %>

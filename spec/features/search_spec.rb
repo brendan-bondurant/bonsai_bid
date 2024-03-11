@@ -10,6 +10,7 @@ RSpec.describe 'Item search', type: :feature do
     expect(page).to_not have_content(@item3.name)
     expect(page).to_not have_content(@item3.description)
   end
+
   it 'allows users to search for items by keyword, two results' do
     user_with_items
     visit root_path
@@ -21,6 +22,7 @@ RSpec.describe 'Item search', type: :feature do
     expect(page).to have_content(@item3.name)
     expect(page).to have_content(@item3.description)
   end
+
   it 'allows users to search for items by keyword, no results' do
     user_with_items
     visit root_path
@@ -29,6 +31,7 @@ RSpec.describe 'Item search', type: :feature do
     
     expect(page).to have_content('No results found')
   end
+  
   it 'allows users to search for items and click on them' do
     user_with_items
     visit root_path

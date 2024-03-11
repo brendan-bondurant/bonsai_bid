@@ -1,15 +1,15 @@
 FactoryBot.define do
   factory :item do
-    seller { nil }
-    category { nil }
-    name { "MyString" }
-    description { "MyText" }
-    images { "MyText" }
-    starting_price { 1.5 }
-    current_price { 1.5 }
-    buy_it_now_price { 1.5 }
-    start_date { "2024-02-16 09:29:12" }
-    end_date { "2024-02-16 09:29:12" }
-    status { "MyString" }
+    association :seller, factory: :user
+    association :category, factory: :category
+    name { Faker::Commerce.product_name }
+    description { Faker::Lorem.paragraph }
+    # images { Faker::LoremPixel.image } 
+    starting_price { Faker::Commerce.price(range: 0..100.0, as_string: true) }
+    current_price { starting_price } 
+    buy_it_now_price { Faker::Commerce.price(range: 0..200.0, as_string: true) }
+    start_date { Faker::Time.between(from: DateTime.now - 10, to: DateTime.now) } 
+    end_date { Faker::Time.between(from: DateTime.now, to: DateTime.now + 10) } 
+    # status { ['Active', 'Sold', 'Expired'].sample }
   end
 end

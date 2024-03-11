@@ -43,6 +43,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
   config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :controller
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -75,9 +76,11 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
-  config.hook_into :webmock
-	# config.filter_sensitive_data("<PROPUBLICA_API_KEY>") { Rails.application.credentials.propublica[:key] }
-config.configure_rspec_metadata!
-end
+# VCR.configure do |config|
+#   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+#   config.hook_into :webmock
+# 	# config.filter_sensitive_data("<PROPUBLICA_API_KEY>") { Rails.application.credentials.propublica[:key] }
+# config.configure_rspec_metadata!
+# end
+# Capybara.javascript_driver = :selenium_chrome
+
