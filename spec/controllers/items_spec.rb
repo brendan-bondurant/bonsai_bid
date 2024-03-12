@@ -5,18 +5,19 @@ RSpec.describe ItemsController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
   let(:invalid_attributes) { { name: '', description: '', starting_price: nil } }
   let(:valid_attributes) do
-    category = Category.find_or_create_by(name: ['Deciduous', 'Coniferous', 'Tropical'].sample)
+    category = create(:category)
     starting_price = Faker::Commerce.price(range: 0..100.0, as_string: true)
     {
-      category: category.id,
+      category_id: category.id,
       name: Faker::Commerce.product_name,
       description: Faker::Lorem.paragraph,
       starting_price: starting_price,
       current_price: starting_price,
       buy_it_now_price: Faker::Commerce.price(range: 0..200.0, as_string: true), 
-      start_date: Faker::Time.between(from: DateTime.now - 10, to: DateTime.now),
+      start_date: Faker::Time.between(from: DateTime.now - 10, to: DateTime.now),    
+      seller_id: user.id,
+      status: 'listed',
       end_date: Faker::Time.between(from: DateTime.now, to: DateTime.now + 10)
-      # status: ['Active', 'Sold', 'Expired'].sample
     }
   end
   
@@ -26,13 +27,13 @@ RSpec.describe ItemsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
-      xit "creates a new Item" do
+      it "creates a new Item" do
         expect {
           post :create, params: { item: valid_attributes }
         }.to change(Item, :count).by(1)
       end
 
-      xit "redirects to the created item" do
+      it "redirects to the created item" do
         post :create, params: { item: valid_attributes }
         expect(response).to redirect_to(item_url(Item.last))
       end
@@ -56,13 +57,14 @@ RSpec.describe ItemsController, type: :controller do
     context "with valid params" do
       let(:new_attributes) { { name: 'Updated Item Name' } }
 
-      xit "updates the requested item" do
+      it "updates the requested item" do
         patch :update, params: { id: item.to_param, item: new_attributes }
-        # item.reload
+        
+        item.reload
         expect(item.name).to eq(new_attributes[:name])
       end
 
-      xit "redirects to the item" do
+      it "redirects to the item" do
         patch :update, params: { id: item.to_param, item: new_attributes }
         expect(response).to redirect_to(item_url(item))
       end

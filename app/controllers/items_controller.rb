@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1 or /items/1.json
   def show
+    require 'pry'; binding.pry
     @item = Item.find(params[:id])
     @category = Category.find(@item.category_id)
   end
@@ -45,10 +46,12 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
+        require 'pry'; binding.pry
         format.html { redirect_to item_url(@item), notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else
         @item.reload #Remove if you want it to stay with the incorrect data
+        @item.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end

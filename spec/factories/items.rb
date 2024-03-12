@@ -9,7 +9,7 @@ FactoryBot.define do
     current_price { starting_price } 
     buy_it_now_price { Faker::Commerce.price(range: 0..200.0, as_string: true) }
     start_date { Faker::Time.between(from: DateTime.now - 10, to: DateTime.now) } 
+    status { ['listed', 'active', 'sold', 'ended'].sample }
     end_date { Faker::Time.between(from: DateTime.now, to: DateTime.now + 10) } 
-    # status { ['Active', 'Sold', 'Expired'].sample }
   end
 end
