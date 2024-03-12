@@ -49,6 +49,7 @@ class ItemsController < ApplicationController
         format.json { render :show, status: :ok, location: @item }
       else
         @item.reload #Remove if you want it to stay with the incorrect data
+        @item.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
