@@ -58,7 +58,6 @@ RSpec.describe ItemsController, type: :controller do
       let(:new_attributes) { { name: 'Updated Item Name' } }
 
       it "updates the requested item" do
-        require 'pry'; binding.pry
         patch :update, params: { id: item.to_param, item: new_attributes }
         
         item.reload
