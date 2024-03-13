@@ -15,9 +15,10 @@ class Item < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :status, presence: true, inclusion: { in: %w(listed active sold ended) }
+  validates :status, presence: true
 
 
-  after_initialize :set_default_status, if: :new_record?
+  # after_initialize :set_default_status, if: :new_record?
   
   private
 

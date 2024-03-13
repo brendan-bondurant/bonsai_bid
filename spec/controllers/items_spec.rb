@@ -16,13 +16,12 @@ RSpec.describe ItemsController, type: :controller do
       buy_it_now_price: Faker::Commerce.price(range: 0..200.0, as_string: true), 
       start_date: Faker::Time.between(from: DateTime.now - 10, to: DateTime.now),    
       seller_id: user.id,
-      status: 'listed',
+      status: :listed,
       end_date: Faker::Time.between(from: DateTime.now, to: DateTime.now + 10)
     }
   end
   
   let(:item) { FactoryBot.create(:item, seller: user) }
-
 
   before { sign_in user }
 
@@ -58,16 +57,14 @@ RSpec.describe ItemsController, type: :controller do
     context "with valid params" do
       let(:new_attributes) { { name: 'Updated Item Name' } }
 
-      xit "updates the requested item" do
+      it "updates the requested item" do
         patch :update, params: { id: item.to_param, item: new_attributes }
         
-        test_item.reload
-        expect(test_item.name).to eq(new_attributes[:name])
+        item.reload
+        expect(item.name).to eq(new_attributes[:name])
       end
 
-      xit "redirects to the item" do
-        item.status = 'listed'
-        item.save
+      it "redirects to the item" do
         patch :update, params: { id: item.to_param, item: new_attributes }
         expect(response).to redirect_to(item_url(item))
       end
