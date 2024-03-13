@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  enum status: { listed: 0, active: 1, sold: 2, ended: 3 }
+  # enum status: { listed: 0, active: 1, sold: 2, ended: 3 }
 
   belongs_to :seller, class_name: 'User'
   belongs_to :category
@@ -15,9 +15,10 @@ class Item < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :status, presence: true, inclusion: { in: %w(listed active sold ended) }
+  validates :status, presence: true
 
 
-  after_initialize :set_default_status, if: :new_record?
+  # after_initialize :set_default_status, if: :new_record?
   
   private
 
