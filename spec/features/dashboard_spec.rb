@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'Dashboard - User Items and Favorites' do
-  scenario 'User views listed and favorited items on dashboard' do
+feature 'Dashboard - User Items and watchlist' do
+  scenario 'User views listed and watched items on dashboard' do
     user = create(:user)
     other_user = create(:user)
     listed_item = create(:item, seller: user)
@@ -13,7 +13,7 @@ feature 'Dashboard - User Items and Favorites' do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    # User favorites an item
+    # User watchlist an item
     visit item_path(other_item)
     click_button 'Favorite'
 
@@ -23,7 +23,7 @@ feature 'Dashboard - User Items and Favorites' do
     # Expect to see listed item
     expect(page).to have_content(listed_item.name)
 
-    # Expect to see favorited item
+    # Expect to see watched item
     expect(page).to have_content(other_item.name)
   end
 end

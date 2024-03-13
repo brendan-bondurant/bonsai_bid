@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FavoritesController, type: :controller do
+RSpec.describe WatchlistsController, type: :controller do
   describe 'POST #create' do
     let(:user) { create(:user) }
     let(:item) { create(:item) }

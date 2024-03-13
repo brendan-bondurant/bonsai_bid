@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #dashboard' do
     let(:user) { create(:user) }
     let!(:item) { create(:item, seller: user) }
-    let!(:favorite) { create(:favorite, user: user, item: item) }
+    let!(:watch) { create(:watchlist, user: user, item: item) }
 
     before do
       sign_in user
@@ -15,8 +15,8 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns(:items)).to include(item)
     end
 
-    it 'assigns @favorites to include items favorited by the user' do
-      expect(assigns(:favorites)).to include(favorite)
+    it 'assigns watch to include items watched by the user' do
+      expect(assigns(:watchlists)).to include(watch)
     end
   end
 
