@@ -15,14 +15,12 @@ feature 'Dashboard - User Items and watchlist' do
 
     # User watchlist an item
     visit item_path(other_item)
-    click_button 'Favorite'
-
+    click_link 'Watch this Item'
     # User visits dashboard
-    visit dashboard_path(user)
-
+    visit dashboard_user_path(user)
     # Expect to see listed item
     expect(page).to have_content(listed_item.name)
-
+    
     # Expect to see watched item
     expect(page).to have_content(other_item.name)
   end

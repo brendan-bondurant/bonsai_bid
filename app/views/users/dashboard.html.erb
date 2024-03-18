@@ -1,0 +1,12 @@
+<%= @user.name %>'s Dashboard
+
+items
+<% @user.items.each do |item| %>
+    <%= item.name %> <br>
+  <% end %>
+
+
+watchlist
+<% @watchlists.each do |fav| %>
+    <%= fav.name %> <br>
+  <% end %>

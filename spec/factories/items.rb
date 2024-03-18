@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :item do
     association :seller, factory: :user
     association :category, factory: :category
-    name { "name" }
+    name { Faker::Commerce.product_name }
     description { Faker::Lorem.paragraph }
     # images { Faker::LoremPixel.image } 
     starting_price { Faker::Commerce.price(range: 0..100.0, as_string: true) }

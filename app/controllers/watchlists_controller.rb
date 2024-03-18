@@ -21,12 +21,13 @@ class WatchlistsController < ApplicationController
 
   # POST /watchlists or /watchlists.json
   def create
-    @watchlist = Watchlist.new(watchlist_params)
-
+    # @watchlist = current_user.watchlists.build(watchlist_params)
+    @watchlist = Watchlist.new(user_id: current_user.id, item_id: params[:item_id])
     respond_to do |format|
       if @watchlist.save
-        format.html { redirect_to watchlist_url(@watchlist), notice: "Watchlist was successfully created." }
-        format.json { render :show, status: :created, location: @watchlist }
+        # format.html { redirect_to watchlist_url(@watchlist), notice: "Item successfully added to your watchlist" }
+        # format.json { render :show, status: :created, location: @watchlist }
+        redirect_to dashboard_user_path(current_user.id)
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @watchlist.errors, status: :unprocessable_entity }
@@ -65,6 +66,7 @@ class WatchlistsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def watchlist_params
-      params.require(:watchlist).permit(:user_id, :item_id)
+      
+      params.require(:watchlists).permit(:item_id)
     end
 end
