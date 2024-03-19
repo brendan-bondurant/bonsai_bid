@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update ]
+  before_action :set_user, only: %i[ show edit update dashboard ]
 
   # GET /users or /users.json
   # def index
@@ -9,6 +9,10 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     @user = current_user
+  end
+
+  def dashboard
+    @watchlists = current_user.watchlist_items
   end
 
   # GET /users/new DEVISE

@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   root "home#index"
 
   get '/search', to: 'search#index', as: 'search'
-  resources :users
+  resources :users do
+    get 'dashboard', on: :member
+  end
   resources :items
+  resources :watchlists
 
 
   get "up" => "rails/health#show", as: :rails_health_check

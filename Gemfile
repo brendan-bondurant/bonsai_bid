@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3"
+gem 'rails', '>= 7.1.3.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -50,6 +50,7 @@ gem 'figaro'
 gem 'bootstrap', '~> 5.0'
 gem 'sassc-rails'
 gem 'selenium-webdriver'
+gem 'skylight'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -63,7 +64,12 @@ group :development, :test do
   # gem 'bullet' not sure if will need, if need, ask if it is approved
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
+  # gem 'rubocop', require: false
+
 end
+
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]

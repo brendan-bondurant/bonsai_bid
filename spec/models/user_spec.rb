@@ -55,4 +55,15 @@ RSpec.describe User, type: :model do
     it { should_not allow_value('abcdefghij').for(:phone) }
     it { should_not allow_value('12345678901').for(:phone) }
   end
+  it 'lets you view watchlist_items' do
+    user = create(:user)
+    other_user = create(:user)
+    listed_item = create(:item, seller: user)
+    other_item = create(:item, seller: other_user)
+    Watchlist.create!(user_id: user.id, item_id: other_item.id)
+    expect(user.watchlist_items.count).to eq(1)
+    expect(user.watchlist_items.class).to eq(Array)
+    expect(user.watchlist_items.first).to eq(other_item)
+  end
+
 end

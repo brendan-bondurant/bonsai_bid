@@ -14,4 +14,13 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates :name, presence: true
   validates :phone, format: { with: /\A\d{10}\z/, message: "must be a 10 digit number" }, presence: true
+
+  def watchlist_items
+    favorites = []
+    self.watchlists.each do |favs|
+      item = Item.find(favs.item_id)
+      favorites << item
+    end
+    favorites
+  end
 end
