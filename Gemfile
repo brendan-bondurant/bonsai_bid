@@ -64,6 +64,7 @@ group :development, :test do
   # gem 'bullet' not sure if will need, if need, ask if it is approved
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'bundler-audit', require: false
 end
 
 group :development do
