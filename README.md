@@ -1,24 +1,72 @@
-# README
+### To Do
+- Docker
+- Finish commented out tests
+- Add testing about the dashboard can view listed items
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Testing info 
 
-Things you may want to cover:
+### Dashboard
+#### Features
+- shows watched items
 
-* Ruby version
+### Feedback
+#### Controller
+ - commented out
+#### Features
+ - commented out
 
-* System dependencies
+### Items
+#### Controller
+- Post create w/ redirect
+- invalid params
+- update w/ redirect
+- update invalid params
+- delete w/ redirect
+#### Features
+- View item details
+- User can update
+- User can delete
+- User submits invalid update data
+- Unauthorized user attempts to update
+- Unauthenticated user views item (no edit option)
+- Authenticated but not seller views (no edit)
+- Seller views their item
 
-* Configuration
+### Login
+#### Features
+- successful login in
+- wrong credentials
+- login from root
+- cannot login on root with wrong credentials
 
-* Database creation
+### Search
+#### Features
+- serach by keyword, one result
+- same but two results
+- same but no results
+- search items and click
+#### User Search
+ - commented out
 
-* Database initialization
+### User
+#### Controller
+ - commented out
+#### Features
+- Sign in with valid info
+- sign in with invalid info
+- views their items
+- updates profile w/ valid info
+- updates profile w/ invalid info
+- user deletes account
+- user updates phone and address with valid info
+- user updates phone and address with invalid info
 
-* How to run the test suite
+### Watchlists
+#### Controller
+ - commented out
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
+
+
