@@ -23,12 +23,13 @@ class WatchlistsController < ApplicationController
   def create
     # @watchlist = current_user.watchlists.build(watchlist_params)
     @watchlist = Watchlist.new(user_id: current_user.id, item_id: params[:item_id])
-    respond_to do |format|
-      if @watchlist.save
-        # format.html { redirect_to watchlist_url(@watchlist), notice: "Item successfully added to your watchlist" }
-        # format.json { render :show, status: :created, location: @watchlist }
-        redirect_to dashboard_user_path(current_user.id)
-      else
+    # respond_to do |format|
+    if @watchlist.save
+      # format.html { redirect_to watchlist_url(@watchlist), notice: "Item successfully added to your watchlist" }
+      # format.json { render :show, status: :created, location: @watchlist }
+      redirect_to dashboard_user_path(current_user.id)
+    else
+      respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @watchlist.errors, status: :unprocessable_entity }
       end
@@ -69,4 +70,5 @@ class WatchlistsController < ApplicationController
       
       params.require(:watchlists).permit(:item_id)
     end
+
 end
