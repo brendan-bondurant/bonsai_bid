@@ -1,5 +1,4 @@
 ### To Do
-- Docker
 - Finish commented out tests
 - Add testing about the dashboard can view listed items
 
@@ -63,7 +62,7 @@
 
 ### Watchlists
 #### Controller
- - commented out
+ - allow user to watch an item
 
 
 
