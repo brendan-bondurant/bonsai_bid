@@ -32,7 +32,7 @@ RSpec.feature "Users", type: :feature do
   end
 
   scenario "User logs in with valid credentials" do
-    user = create(:user, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
+    user = create(:user, id: 345345, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
 
     visit new_user_session_path
     fill_in "user_email", with: user.email
@@ -105,8 +105,8 @@ RSpec.feature "Users", type: :feature do
     visit edit_user_path(test_user)
     
 
-    fill_in "Phone", with: "" # Invalid phone number
-    fill_in "Address", with: "" # Invalid address
+    fill_in "Phone", with: ""
+    fill_in "Address", with: ""
 
     click_button "Update User"
     expect(page).to have_text("3 errors prohibited this user from being saved:")

@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-require 'rails_helper'
-
 RSpec.describe "Users", type: :request do
   # Tests for the dashboard action
   describe 'GET /users/:id/dashboard' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, id: 91) }
     let!(:item) { create(:item, seller: user) }
     let!(:watch) { create(:watchlist, user: user, item: item) }
 

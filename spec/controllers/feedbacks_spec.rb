@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe FeedbacksController, type: :controller do
   describe 'POST #create' do
-    let(:from_user) { create(:user) }
-    let(:to_user) { create(:user) }
+    let(:from_user) { create(:user, id: 79) }
+    let(:to_user) { create(:user, id: 78) }
     let(:item) { create(:item, seller: to_user) }
 
     before do

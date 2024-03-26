@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature 'User finds & views items', type: :feature do
-  
+  let(:user) { create(:user, id: 798) }
+
   scenario 'User finds items by keywords' do
-    FactoryBot.create(:item, name: 'Vintage Vase', description: 'A beautiful vintage vase.')
+    FactoryBot.create(:item, id: 999, seller: user, name: 'Vintage Vase', description: 'A beautiful vintage vase.')
 
     visit root_path
     fill_in 'search', with: 'vase'
@@ -14,7 +15,7 @@ RSpec.feature 'User finds & views items', type: :feature do
   end
   
   scenario 'User finds items with clear descriptions and details' do
-    item = FactoryBot.create(:item, name: 'Vintage Vase', description: 'A beautiful vintage vase from the 1920s.')
+    item = FactoryBot.create(:item, id: 888, seller: user, name: 'Vintage Vase', description: 'A beautiful vintage vase from the 1920s.')
 
     visit items_path
 

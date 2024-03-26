@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "UserLogins", type: :feature do
-  let!(:user) { FactoryBot.create(:user, email: 'user@example.com', password: 'password') }
+  let!(:user) { FactoryBot.create(:user, id: 879, email: 'user@example.com', password: 'password') }
 
   scenario "User logs in successfully" do
     visit new_user_session_path

@@ -129,7 +129,7 @@ RSpec.feature "Items", type: :feature do
       start_date: Date.today,
       end_date: Date.today + 10.days
     ) 
-    non_seller = FactoryBot.create(:user)
+    non_seller = FactoryBot.create(:user, id: 8787)
     login_as(non_seller, scope: :user)
     visit item_path(item)
     expect(page).to have_content(item.name)
