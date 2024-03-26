@@ -13,15 +13,11 @@ feature 'Dashboard - User Items and watchlist' do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    # User watchlist an item
     visit item_path(other_item)
     click_link 'Watch this Item'
-    # User visits dashboard
     visit dashboard_user_path(user)
-    # Expect to see listed item
     expect(page).to have_content(listed_item.name)
     
-    # Expect to see watched item
     expect(page).to have_content(other_item.name)
   end
 end

@@ -62,7 +62,6 @@ RSpec.feature "UserLogins", type: :feature do
     click_button 'Log in'
 
     expect(page).to have_content('Invalid Email or password')
-    # Send to user sign in page
     expect(current_path).to eq(new_user_session_path)
   end
 end

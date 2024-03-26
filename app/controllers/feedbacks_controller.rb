@@ -22,7 +22,6 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks or /feedbacks.json
   def create
     @feedback = Feedback.new(feedback_params)
-
     respond_to do |format|
       if @feedback.save
         format.html { redirect_to feedback_url(@feedback), notice: "Feedback was successfully created." }
