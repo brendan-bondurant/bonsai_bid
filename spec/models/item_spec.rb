@@ -26,7 +26,17 @@ RSpec.describe Item, type: :model do
         let(:item) { Item.new }
 
         it 'sets the default status to "listed"' do
+          item.valid?
+
           expect(item.status).to eq('listed')
+        end
+      end
+      context 'when status is already set' do
+        let(:item) { Item.new(status: 'sold') }
+
+        it 'does not override the existing status' do
+          item.valid?
+          expect(item.status).to eq('sold')
         end
       end
     end

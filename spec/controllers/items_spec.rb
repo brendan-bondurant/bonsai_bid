@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ItemsController, type: :controller do
   include Devise::Test::ControllerHelpers
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, id: 889) }
   let(:invalid_attributes) { { name: '', description: '', starting_price: nil } }
   let(:valid_attributes) do
     category = create(:category)

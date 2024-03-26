@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'Dashboard - User Items and watchlist' do
   scenario 'User views listed and watched items on dashboard' do
-    user = create(:user)
-    other_user = create(:user)
+    user = User.create!(id: 333, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )      
+    other_user = User.create!(id: 334, email: "othertest@othertest.com", password: "password", name: "othertest", address: 'other street', phone: 9879873212 )  
     listed_item = create(:item, seller: user)
     other_item = create(:item, seller: other_user)
 
@@ -13,15 +13,11 @@ feature 'Dashboard - User Items and watchlist' do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    # User watchlist an item
     visit item_path(other_item)
     click_link 'Watch this Item'
-    # User visits dashboard
     visit dashboard_user_path(user)
-    # Expect to see listed item
     expect(page).to have_content(listed_item.name)
     
-    # Expect to see watched item
     expect(page).to have_content(other_item.name)
   end
 end

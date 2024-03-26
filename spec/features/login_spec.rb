@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "UserLogins", type: :feature do
-  let!(:user) { FactoryBot.create(:user, email: 'user@example.com', password: 'password') }
+  let!(:user) { FactoryBot.create(:user, id: 879, email: 'user@example.com', password: 'password') }
 
   scenario "User logs in successfully" do
     visit new_user_session_path
@@ -62,7 +62,6 @@ RSpec.feature "UserLogins", type: :feature do
     click_button 'Log in'
 
     expect(page).to have_content('Invalid Email or password')
-    # Send to user sign in page
     expect(current_path).to eq(new_user_session_path)
   end
 end
