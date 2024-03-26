@@ -7,6 +7,12 @@
 </div>
 
 <div>
+  <% @user.received_feedbacks.each do |review| %>
+  <%= review.comment %> <br>
+  <% end %>
+</div>
+
+<div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= button_to "Destroy this user", @user, method: :delete %>
 </div>

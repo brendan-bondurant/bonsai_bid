@@ -8,11 +8,12 @@
 
 #     before do
 #       sign_in user
-#       get :dashboard
+#       get :dashboard, params: { id: user.id }
 #     end
 
 #     it 'assigns @items to include items listed by the user' do
-#       expect(assigns(:items)).to include(item)
+#       require 'pry'; binding.pry
+#       expect(response.body).to include(item.name)
 #     end
 
 #     it 'assigns watch to include items watched by the user' do
