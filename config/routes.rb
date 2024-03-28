@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/search', to: 'search#index', as: 'search'
   resources :users do
     get 'dashboard', on: :member
+    resources :watchlists
   end
   resources :items
   resources :watchlists

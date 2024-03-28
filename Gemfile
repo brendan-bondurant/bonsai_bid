@@ -67,6 +67,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'brakeman', require: false
+  gem 'faker'
   gem 'bundler-audit', require: false
   # gem 'rubocop', require: false
 
@@ -85,7 +86,7 @@ group :development do
 end
 
 group :test do
-  gem 'faker'
+
   gem 'webmock'
   gem 'vcr'
   gem 'simplecov'

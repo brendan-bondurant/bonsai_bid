@@ -1,25 +1,22 @@
 class WatchlistsController < ApplicationController
   before_action :set_watchlist, only: %i[ show edit update destroy ]
 
-  # GET /watchlists or /watchlists.json
   def index
-    @watchlists = Watchlist.all
+    @watchlists = current_user.watchlists
   end
 
-  # GET /watchlists/1 or /watchlists/1.json
   def show
   end
 
-  # GET /watchlists/new
   def new
     @watchlist = Watchlist.new
   end
 
-  # GET /watchlists/1/edit
+
   def edit
   end
 
-  # POST /watchlists or /watchlists.json
+
   def create
     # @watchlist = current_user.watchlists.build(watchlist_params)
     @watchlist = Watchlist.new(user_id: current_user.id, item_id: params[:item_id])
@@ -60,14 +57,12 @@ class WatchlistsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_watchlist
       @watchlist = Watchlist.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def watchlist_params
-      
       params.require(:watchlists).permit(:item_id)
     end
 
