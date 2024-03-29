@@ -20,13 +20,15 @@ class WatchlistsController < ApplicationController
   def create
     # @watchlist = current_user.watchlists.build(watchlist_params)
     @watchlist = Watchlist.new(user_id: current_user.id, item_id: params[:item_id])
-    # respond_to do |format|
+    respond_to do |format|
+    
+    
     if @watchlist.save
-      # format.html { redirect_to watchlist_url(@watchlist), notice: "Item successfully added to your watchlist" }
-      # format.json { render :show, status: :created, location: @watchlist }
-      redirect_to dashboard_user_path(current_user.id)
+      format.html { redirect_to dashboard_user_path(current_user.id), notice: "Item successfully added to your watchlist" }
+      format.json { render :show, status: :created, location: @watchlist }
+      
     else
-      respond_to do |format|
+
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @watchlist.errors, status: :unprocessable_entity }
       end
