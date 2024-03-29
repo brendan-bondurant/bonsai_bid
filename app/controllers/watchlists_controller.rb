@@ -51,7 +51,7 @@ class WatchlistsController < ApplicationController
     @watchlist.destroy!
 
     respond_to do |format|
-      format.html { redirect_to watchlists_url, notice: "Watchlist was successfully destroyed." }
+      format.html { redirect_to dashboard_user_path(current_user.id), notice: "Watchlist was successfully destroyed." }
       format.json { head :no_content }
     end
   end

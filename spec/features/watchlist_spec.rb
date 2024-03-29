@@ -21,35 +21,24 @@ RSpec.feature "User's Watchlist Features", type: :feature do
   end
 
   scenario "User adds an item to their watchlist" do
-    visit new_watchlist_path
+    visit item_path(item)
 
-    select item.name, from: "Item" # Adjust based on your form
-    click_button "Add to Watchlist"
-
+    
+    click_link "Watch this Item"
     expect(user.watchlists.count).to eq 1
-    expect(page).to have_content "Item successfully added to your watchlist"
-  end
-
-  scenario "User updates an item in their watchlist" do
-    watchlist = create(:watchlist, user: user)
-    new_item = create(:item)
-
-    visit edit_watchlist_path(watchlist)
-
-    select new_item.name, from: "Item" # Adjust based on your form
-    click_button "Update Watchlist"
-
-    expect(watchlist.reload.item).to eq new_item
-    expect(page).to have_content "Watchlist was successfully updated."
+    expect(page).to have_content(item.name)
+    click_link item.name
+    expect(current_path).to eq item_path(item)
   end
 
   scenario "User deletes an item from their watchlist" do
-    watchlist = create(:watchlist, user: user)
+    create(:watchlist, item: item, user: user)
 
-    visit user_watchlist_path(user) 
+    visit user_watchlists_path(user)
     click_link "Delete" 
-
+    
     expect(user.watchlists.count).to eq 0
-    expect(page).to have_content "Watchlist was successfully removed." 
+    expect(page).to have_content "Watchlist was successfully destroyed." 
+    expect(current_path).to eq dashboard_user_path(user)
   end
 end

@@ -6,7 +6,7 @@
 
   <p>
     <strong>Item:</strong>
-    <%= watchlist.item.name %>
+    <%= link_to watchlist.item.name, item_path(watchlist.item.id) %>
   </p>
 
 </div>
