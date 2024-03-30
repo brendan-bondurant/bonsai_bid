@@ -9,7 +9,7 @@ class WatchlistsController < ApplicationController
   end
 
   def new
-    @watchlist = Watchlist.new
+    # @watchlist = Watchlist.new
   end
 
 
