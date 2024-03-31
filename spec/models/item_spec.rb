@@ -18,6 +18,7 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:start_date) }
     it { should validate_presence_of(:end_date) }
     it { should validate_presence_of(:status) }
+    it { should validate_presence_of(:bid_increment) }
   end
 
   describe 'callbacks' do

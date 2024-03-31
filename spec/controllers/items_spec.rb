@@ -11,6 +11,7 @@ RSpec.describe ItemsController, type: :controller do
       category_id: category.id,
       name: Faker::Commerce.product_name,
       description: Faker::Lorem.paragraph,
+      bid_increment: Faker::Commerce.price(range: 0..20.0, as_string: true),
       starting_price: starting_price,
       current_price: starting_price,
       buy_it_now_price: Faker::Commerce.price(range: 0..200.0, as_string: true), 

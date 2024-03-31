@@ -13,6 +13,7 @@ class Item < ApplicationRecord
   validates :current_price, numericality: { greater_than_or_equal_to: 0 }
   validates :buy_it_now_price, numericality: { greater_than_or_equal_to: 0 }
   validates :start_date, presence: true
+  validates :bid_increment, presence: true
   validates :end_date, presence: true
   validates :status, presence: true, inclusion: { in: %w(listed active sold ended) }
   validates :status, presence: true

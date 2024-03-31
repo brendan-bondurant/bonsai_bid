@@ -34,6 +34,11 @@
     <%= form.label :starting_price %>
     <%= form.text_field :starting_price, id: :item_starting_price %>
   </div>
+
+    <div>
+    <%= form.label :bid_increment, style: "display: block" %>
+    <%= form.text_field :bid_increment, id: :item_bid_increment %>
+  </div>
   
   <div class="field">
     <%= form.label :buy_it_now_price %>

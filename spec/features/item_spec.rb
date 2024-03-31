@@ -10,6 +10,7 @@ RSpec.feature "Items", type: :feature do
     fill_in "Name", with: "Test Item"
     fill_in "Description", with: "This is a test item description."
     fill_in "Starting price", with: 10.00
+    fill_in "Bid increment", with: 5.00
     fill_in "Buy it now price", with: 30.00
     select category.name, from: "Category"
     fill_in "Start date", with: Date.today
@@ -76,6 +77,7 @@ RSpec.feature "Items", type: :feature do
       description: "Bonsai Tree",
       starting_price: 20.00,
       current_price: 20.00,
+      bid_increment: 10.00,
       buy_it_now_price: 40.00,
       category: category,
       seller: user1,
@@ -100,6 +102,7 @@ RSpec.feature "Items", type: :feature do
       starting_price: 20.00,
       current_price: 20.00,
       buy_it_now_price: 40.00,
+      bid_increment: 7.00,
       category: category,
       seller: user1,
       status: 'listed',
@@ -122,6 +125,7 @@ RSpec.feature "Items", type: :feature do
       description: "Bonsai Tree",
       starting_price: 20.00,
       current_price: 20.00,
+      bid_increment: 8.00,
       buy_it_now_price: 40.00,
       category: category,
       seller: user1,
@@ -146,6 +150,7 @@ RSpec.feature "Items", type: :feature do
       name: "Test Item 4",
       description: "Bonsai Tree",
       starting_price: 20.00,
+      bid_increment: 30.00,
       current_price: 20.00,
       buy_it_now_price: 40.00,
       category: category,

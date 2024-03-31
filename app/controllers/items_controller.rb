@@ -72,6 +72,6 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
   def item_params
-    params.require(:item).permit(:seller_id, :category_id, :name, :description, :starting_price, :current_price, :buy_it_now_price, :start_date, :end_date, :status)
+    params.require(:item).permit(:seller_id, :category_id, :name, :description, :starting_price, :current_price, :buy_it_now_price, :start_date, :bid_increment, :end_date, :status)
   end
 end
