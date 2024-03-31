@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:feedbacks).with_foreign_key('from_user_id') }
     it { should have_many(:received_feedbacks).class_name('Feedback').with_foreign_key('to_user_id') }
     it { should have_many(:watchlists) }
+    it { should have_many(:purchases) }
+    it { should have_many(:sales) }
   end
 
   describe 'validations' do

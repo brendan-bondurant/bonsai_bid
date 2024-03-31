@@ -9,5 +9,11 @@ class CreateTransactions < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+    add_index :transactions, :buyer_id
+    add_index :transactions, :seller_id
+    add_index :transactions, :item_id
+    add_foreign_key :transactions, :users, column: :buyer_id
+    add_foreign_key :transactions, :users, column: :seller_id
+    add_foreign_key :transactions, :items
   end
 end

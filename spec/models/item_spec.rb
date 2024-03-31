@@ -7,6 +7,7 @@ RSpec.describe Item, type: :model do
     it { should have_many(:bids) }
     it { should have_many(:feedbacks) }
     it { should have_many(:watchlists) }
+    it { should have_one(:sale_transaction) }
   end
 
   describe 'validations' do

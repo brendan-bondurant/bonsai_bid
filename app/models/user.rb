@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :feedbacks, foreign_key: 'from_user_id'
   has_many :received_feedbacks, class_name: 'Feedback', foreign_key: 'to_user_id'
   has_many :watchlists
+  has_many :purchases, class_name: 'SaleTransaction', foreign_key: 'buyer_id'
+  has_many :sales, class_name: 'SaleTransaction', foreign_key: 'seller_id'
 
   validates :address, presence: true
   validates :name, presence: true

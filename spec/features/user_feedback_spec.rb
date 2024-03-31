@@ -10,23 +10,23 @@ feature 'Feedback and Transaction Features' do
   end
 
   scenario 'User views a transaction with ratings' do
-    transaction = create(:transaction, buyer: buyer, seller: seller, item: item)
-    create(:feedback, transaction: transaction, rating: 5)
+    sale_transaction = create(:sale_transaction, buyer: buyer, seller: seller, item: item)
+    create(:feedback, sale_transaction: sale_transaction, rating: 5)
 
-    visit transaction_path(transaction)
+    visit sale_transaction_path(sale_transaction)
     expect(page).to have_content('Rating')
     expect(page).to have_content('★★★★★') # Adjust based on your rating display
   end
 
   scenario 'Buyer views their transaction history' do
-    create_list(:transaction, 3, buyer: buyer, seller: seller, item: item)
+    create_list(:sale_transaction, 3, buyer: buyer, seller: seller, item: item)
 
     visit transaction_history_path(buyer)
     expect(page).to have_selector('.transaction', count: 3)
   end
 
   scenario 'Seller views their selling history' do
-    create_list(:transaction, 5, seller: seller, buyer: buyer, item: item)
+    create_list(:sale_transaction, 5, seller: seller, buyer: buyer, item: item)
 
     sign_out buyer
     sign_in seller
@@ -36,8 +36,8 @@ feature 'Feedback and Transaction Features' do
   end
 
   scenario 'User views a seller profile with rating and history' do
-    transaction = create(:transaction, seller: seller, buyer: buyer, item: item)
-    create(:feedback, transaction: transaction, rating: 4)
+    sale_transaction = create(:sale_transaction, seller: seller, buyer: buyer, item: item)
+    create(:feedback, sale_transaction: sale_transaction, rating: 4)
 
     visit user_profile_path(seller)
     expect(page).to have_content('Rating: ★★★★☆')
