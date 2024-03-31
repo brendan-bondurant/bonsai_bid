@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
-  let!(:test_user) { create(:user, id: 1000, email: "testuser@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user") }
+  let!(:test_user) { create(:user, email: "testuser@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user") }
 
   
   scenario "User signs up with valid information" do
@@ -32,7 +32,7 @@ RSpec.feature "Users", type: :feature do
   end
 
   scenario "User logs in with valid credentials" do
-    user = create(:user, id: 345345, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
+    user = create(:user, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
 
     visit new_user_session_path
     fill_in "user_email", with: user.email

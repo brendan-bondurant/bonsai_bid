@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :items
   resources :watchlists
   resources :feedbacks
+  resources :sale_transactions
 
 
   get "up" => "rails/health#show", as: :rails_health_check

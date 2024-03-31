@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_195151) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_31_210035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,11 +39,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_195151) do
     t.bigint "to_user_id", null: false
     t.integer "rating"
     t.text "comment"
-    t.datetime "feedback_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "sale_transaction_id", null: false
+    t.text "reply"
     t.index ["from_user_id"], name: "index_feedbacks_on_from_user_id"
     t.index ["item_id"], name: "index_feedbacks_on_item_id"
+    t.index ["sale_transaction_id"], name: "index_feedbacks_on_sale_transaction_id"
     t.index ["to_user_id"], name: "index_feedbacks_on_to_user_id"
   end
 
@@ -107,6 +109,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_195151) do
   add_foreign_key "bids", "items"
   add_foreign_key "bids", "users", column: "bidder_id"
   add_foreign_key "feedbacks", "items"
+  add_foreign_key "feedbacks", "sale_transactions"
   add_foreign_key "feedbacks", "users", column: "from_user_id"
   add_foreign_key "feedbacks", "users", column: "to_user_id"
   add_foreign_key "items", "categories"

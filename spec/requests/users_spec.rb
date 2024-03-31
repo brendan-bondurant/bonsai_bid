@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
   # Tests for the dashboard action
   describe 'GET /users/:id/dashboard' do
-    let(:user) { create(:user, id: 91) }
+    let(:user) { create(:user) }
     let!(:item) { create(:item, seller: user) }
     let!(:watch) { create(:watchlist, user: user, item: item) }
 
@@ -22,8 +22,8 @@ RSpec.describe "Users", type: :request do
   end
 
   describe 'GET /users/:id' do
-    let(:user) { create(:user, id: 89) }
-    let(:feedback_giver) { create(:user, id: 90) }
+    let(:user) { create(:user) }
+    let(:feedback_giver) { create(:user) }
     let(:item) { create(:item, seller: user) } 
     let!(:feedback) { create(:feedback, to_user: user, from_user: feedback_giver, item: item, comment: "Very responsive.") }
 

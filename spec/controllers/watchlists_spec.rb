@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe WatchlistsController, type: :controller do
   describe 'POST #create' do
-    let(:user) { create(:user, id: 890) }
-    let(:other_user) { create(:user, id: 894) }
-    let(:item) { create(:item, seller: other_user, id: 89098) }
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+    let(:item) { create(:item, seller: other_user) }
 
     before do
       sign_in user

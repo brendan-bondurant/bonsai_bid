@@ -1,0 +1,7 @@
+<h1>Feedback</h1>
+
+<% @sale_transaction.feedbacks.each do |review| %>
+  Rating:<%=review.rating%> <br>
+  Comment:<%=review.comment%> <br>
+  From: <% review.from_user.name %> <br> 
+  <% end %>

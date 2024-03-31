@@ -3,8 +3,8 @@ require 'rails_helper'
 
 RSpec.describe SaleTransaction, type: :model do
   it "is valid with valid attributes" do
-    user = create(:user, id: 12)
-    item = create(:item, seller: user, id: 14) 
+    user = create(:user)
+    item = create(:item, seller: user) 
     sale_transaction = create(:sale_transaction, item_id: item.id, seller_id: user.id)
     expect(sale_transaction).to be_valid
     expect(sale_transaction.buyer_id).to be_present

@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'validates uniqueness of email' do
-      existing_user = User.create!(id: 1, name: 'test', email: 'test@example.com', password: 'password123', address: '543 Main', phone: 1231231234, password_confirmation: 'password123')
+      existing_user = User.create!(name: 'test', email: 'test@example.com', password: 'password123', address: '543 Main', phone: 1231231234, password_confirmation: 'password123')
       user = User.new(email: existing_user.email)
       expect(user).to be_invalid
       expect(user.errors[:email]).to include("has already been taken")
@@ -58,8 +58,8 @@ RSpec.describe User, type: :model do
     it { should_not allow_value('12345678901').for(:phone) }
   end
   it 'lets you view watchlist_items' do
-    user = User.create!(id: 1000, name: 'test1', email: 'test@example.com', password: 'password123', address: '543 Main', phone: 1231231234, password_confirmation: 'password123')    
-    other_user = User.create!(id: 1001, name: 'test1001', email: 'test123@example.com', password: 'password123', address: '321 Main', phone: 1234561234, password_confirmation: 'password123')   
+    user = User.create!(name: 'test1', email: 'test@example.com', password: 'password123', address: '543 Main', phone: 1231231234, password_confirmation: 'password123')    
+    other_user = User.create!(name: 'test1001', email: 'test123@example.com', password: 'password123', address: '321 Main', phone: 1234561234, password_confirmation: 'password123')   
     listed_item = create(:item, seller: user)
     other_item = create(:item, seller: other_user)
     Watchlist.create!(user_id: user.id, item_id: other_item.id)

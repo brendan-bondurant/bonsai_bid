@@ -64,6 +64,6 @@ class FeedbacksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def feedback_params
-      params.require(:feedback).permit(:item_id, :from_user_id, :to_user_id, :rating, :comment, :feedback_time)
+      params.require(:feedback).permit(:item_id, :sale_transaction_id, :from_user_id, :to_user_id, :rating, :comment)
     end
 end

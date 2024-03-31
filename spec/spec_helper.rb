@@ -12,7 +12,7 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 def sign_in_w_form
-  @user = create(:user, id: 123, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
+  @user = create(:user, email: "test@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user")
 
   visit new_user_session_path
   fill_in "user_email", with: @user.email
@@ -24,7 +24,6 @@ def user_with_items
   sign_in_w_form
   category = create(:category)  
   @item1 = Item.create!(
-    id: 123,
     name: "Test Item 1",
     description: "Bonsai bush",
     starting_price: 10.00,
@@ -39,7 +38,6 @@ def user_with_items
   )
 
   @item2 = Item.create!(
-    id: 124,
     name: "Test Item 2",
     description: "Book about stuff",
     starting_price: 15.00,
@@ -54,7 +52,6 @@ def user_with_items
   )
 
   @item3 = Item.create!(
-    id: 125,
     name: "Test Item 3",
     description: "Bonsai Tree",
     starting_price: 20.00,

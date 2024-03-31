@@ -68,11 +68,10 @@ RSpec.feature "Items", type: :feature do
   end
 
   scenario "Unauthorized user attempts to update item" do
-    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user1 = User.create!(email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
     user_with_items
     category = create(:category)
     item = Item.create!(
-      id: 126,
       name: "Test Item 4",
       description: "Bonsai Tree",
       starting_price: 20.00,
@@ -92,11 +91,10 @@ RSpec.feature "Items", type: :feature do
   end
 
   scenario "Unauthenticated user views an item" do
-    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user1 = User.create!(email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
     user_with_items
     category = create(:category)
     item = Item.create!(
-      id: 126,
       name: "Test Item 4",
       description: "Bonsai Tree",
       starting_price: 20.00,
@@ -116,11 +114,10 @@ RSpec.feature "Items", type: :feature do
   end
 
   scenario "Authenticated user who is not the seller views an item" do
-    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user1 = User.create!(email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
     user_with_items
     category = create(:category)
     item = Item.create!(
-      id: 126,
       name: "Test Item 4",
       description: "Bonsai Tree",
       starting_price: 20.00,
@@ -142,11 +139,10 @@ RSpec.feature "Items", type: :feature do
   end
 
   scenario "Authenticated seller views their item" do
-    user1 = User.create!(id: 321, email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
+    user1 = User.create!(email: "test@test.com", password: "password", name: "test", address: 'test street', phone: 9876543212 )  
     user_with_items
     category = create(:category)
     item = Item.create!(
-      id: 126,
       name: "Test Item 4",
       description: "Bonsai Tree",
       starting_price: 20.00,

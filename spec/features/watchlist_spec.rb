@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature "User's Watchlist Features", type: :feature do
-  let!(:user) { create(:user, id: 12) }
-  let!(:other_user) { create(:user, id: 13) }
-  let!(:item) { create(:item, seller: other_user, id: 14) }
-  let!(:other_item) { create(:item, seller: user, id: 15) }
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
+  let!(:item) { create(:item, seller: other_user) }
+  let!(:other_item) { create(:item, seller: user) }
 
   before do
     login_as(user, scope: :user)
