@@ -5,9 +5,7 @@ feature 'Transaction History Features' do
   let(:other_user) { create(:user) }
   let(:item) { create(:item, seller: user) }
 
-  before do
-    driven_by(:rack_test)  # Ensure you're using a driver that supports Capybara's page methods
-  end
+
 
   scenario 'User views their comprehensive transaction history' do
     sign_in user

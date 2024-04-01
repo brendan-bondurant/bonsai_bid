@@ -15,6 +15,14 @@ class UsersController < ApplicationController
     @watchlists = current_user.watchlist_items
   end
 
+  def profile
+    if current_user.id != params[:id]
+    @other_user = User.includes(sales: :feedbacks, purchases: :feedbacks).find(params[:id])
+    else
+      redirect_to user_dashboard_path
+    end
+  end
+
   # GET /users/new DEVISE
   # def new
   #   @user = User.new

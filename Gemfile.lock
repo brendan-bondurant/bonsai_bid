@@ -91,6 +91,9 @@ GEM
     brakeman (6.1.2)
       racc
     builder (3.2.4)
+    bullet (7.1.6)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     bundler-audit (0.9.1)
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
@@ -319,6 +322,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uniform_notifier (1.16.0)
     uri (0.13.0)
     vcr (6.2.0)
     warden (1.2.9)
@@ -351,6 +355,7 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.0)
   brakeman
+  bullet
   bundler-audit
   capybara
   cssbundling-rails

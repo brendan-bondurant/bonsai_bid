@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_210035) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_01_225425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_210035) do
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.text "content"
+    t.bigint "feedback_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feedback_id"], name: "index_replies_on_feedback_id"
+  end
+
   create_table "sale_transactions", force: :cascade do |t|
     t.bigint "buyer_id"
     t.bigint "seller_id"
@@ -76,6 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_210035) do
     t.datetime "transaction_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "payment_status", default: 0, null: false
     t.index ["buyer_id"], name: "index_sale_transactions_on_buyer_id"
     t.index ["item_id"], name: "index_sale_transactions_on_item_id"
     t.index ["seller_id"], name: "index_sale_transactions_on_seller_id"
@@ -114,6 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_210035) do
   add_foreign_key "feedbacks", "users", column: "to_user_id"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "users", column: "seller_id"
+  add_foreign_key "replies", "feedbacks"
   add_foreign_key "sale_transactions", "items"
   add_foreign_key "sale_transactions", "users", column: "buyer_id"
   add_foreign_key "sale_transactions", "users", column: "seller_id"

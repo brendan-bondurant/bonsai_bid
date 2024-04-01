@@ -73,4 +73,13 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+  config.after_initialize do
+    Bullet.enable = true # Enable Bullet gem
+    Bullet.alert = true # JavaScript alerts in the browser
+    Bullet.bullet_logger = true # Log to Bullet log file (Rails.root/log/bullet.log)
+    Bullet.console = true # Log warnings to your browser's console
+    Bullet.rails_logger = true # Add warnings directly to the Rails log
+    Bullet.add_footer = true # Adds the details at the bottom of the page
+    # Bullet.raise = true # Raise an error and make your specs fail if Bullet detects an N+1 query or unnecessary eager loading
+  end
 end

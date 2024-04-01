@@ -1,0 +1,27 @@
+<h1><%= @other_user.name %></h1>
+
+<h3>Seller Reviews</h3>
+<% if @other_user.sales.any? %>
+  <% @other_user.sales.each do |sale| %>
+    <% sale.feedbacks.each do |feedback| %>
+      From: <%= feedback.from_user.name %> <br>
+      Rating: <%= feedback.rating %> <br>
+      <%= feedback.comment %> <br>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>No seller reviews.</p>
+<% end %>
+
+<h3>Buyer Reviews</h3>
+<% if @other_user.purchases.any? %>
+  <% @other_user.purchases.each do |purchase| %>
+    <% purchase.feedbacks.each do |feedback| %>
+      From: <%= feedback.from_user.name %> <br>
+      Rating: <%= feedback.rating %> <br>
+      <%= feedback.comment %> <br>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>No buyer reviews.</p>
+<% end %>

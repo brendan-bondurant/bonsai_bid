@@ -63,7 +63,8 @@ group :development, :test do
   gem 'pry'
   gem 'capybara'
   gem 'launchy'
-  # gem 'bullet' not sure if will need, if need, ask if it is approved
+  gem 'bullet'
+
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'brakeman', require: false

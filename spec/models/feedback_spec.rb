@@ -6,6 +6,7 @@ RSpec.describe Feedback, type: :model do
     it { should belong_to(:from_user).class_name('User') }
     it { should belong_to(:to_user).class_name('User') }
     it { should belong_to(:sale_transaction) }
+    it { is_expected.to have_many(:replies).dependent(:destroy) }
   end
 
   describe 'validations' do

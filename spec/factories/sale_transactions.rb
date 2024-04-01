@@ -5,6 +5,6 @@ FactoryBot.define do
     association :seller, factory: :user
     association :item, factory: :item
     final_price { Faker::Commerce.price(range: 0..200.0, as_string: true) }
-    transaction_time { Time.current }
+    payment_status { ['incomplete', 'pending', 'complete'].sample }
   end
 end
