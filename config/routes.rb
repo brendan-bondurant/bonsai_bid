@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
 
   get '/search', to: 'search#index', as: 'search'
@@ -9,15 +8,17 @@ Rails.application.routes.draw do
     get 'dashboard', on: :member
     get 'profile', on: :member
     resources :watchlists
+    resources :sale_transactions, only: [:index]  
   end
   resources :items
   resources :watchlists
+  resources :sale_transactions, only: [:show] do
+    resources :feedbacks, only: [:index]
+  end
   resources :feedbacks
-  resources :sale_transactions
 
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+
 end
