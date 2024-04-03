@@ -1,4 +1,6 @@
-<%= form_with(model: [@sale_transaction, @feedback, reply]) do |form| %>
+<%= form_with(model: [@sale_transaction, @parent, reply], local: true) do |form| %>
+  <%= form.label :content, 'Edit Reply' %>
+<%= form.text_area :content %>
   <% if reply.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
@@ -11,10 +13,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content, "Reply" %>
-    <%= form.text_area :content %>
-  </div>
+
 
   <div class="actions">
     <%= form.submit %>
