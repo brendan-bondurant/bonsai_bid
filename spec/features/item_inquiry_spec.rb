@@ -23,8 +23,7 @@ feature 'Item Inquiry and Support' do
       
       fill_in 'Content', with: 'The item is in mint condition, barely used.'
       click_button 'Reply'
-      
-save_and_open_page
+
 
       expect(page).to have_content('Reply posted successfully.')
       expect(page).to have_content('The item is in mint condition, barely used.')

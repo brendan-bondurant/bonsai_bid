@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Reply, type: :model do
   describe 'associations' do
-    it { is_expected.to belong_to(:feedback) }
+    it { is_expected.to belong_to(:respondable) }
   end
 
   describe 'validations' do

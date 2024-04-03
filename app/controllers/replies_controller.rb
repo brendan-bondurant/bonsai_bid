@@ -25,7 +25,6 @@ class RepliesController < ApplicationController
   end
 
   def create
-    require 'pry'; binding.pry
     @reply = @parent.replies.build(reply_params)
     @reply.user_id = current_user.id 
     @reply.save
