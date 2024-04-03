@@ -16,7 +16,7 @@ RSpec.describe "Users", type: :request do
       expect(response.body).to include(item.name)
     end
 
-    it 'displays items in the user’s watchlist' do
+    it 'displays items in the user watchlist' do
       expect(response.body).to include(watch.item.name)
     end
   end

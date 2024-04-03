@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Item search', type: :feature do
   it 'allows users to search for items by keyword, one result' do
     user_with_items

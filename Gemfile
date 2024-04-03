@@ -93,5 +93,7 @@ group :test do
   gem 'simplecov'
   gem 'shoulda-matchers', '~> 6.0'
   gem 'rails-controller-testing'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 

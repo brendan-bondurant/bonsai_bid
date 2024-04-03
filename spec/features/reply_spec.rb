@@ -9,7 +9,8 @@ RSpec.feature 'Feedback Reply Management', type: :feature do
 
   scenario 'Complete feedback reply flow' do
     sign_in seller
-    visit feedback_path(feedback)
+    visit sale_transaction_feedback_path(sale_transaction,feedback)
+    save_and_open_page
     fill_in 'Reply', with: 'Thank you for your feedback, we will improve.'
     click_button 'Post Reply'
     expect(page).to have_content('Reply posted.')
@@ -17,7 +18,7 @@ RSpec.feature 'Feedback Reply Management', type: :feature do
 
     sign_out seller
     sign_in buyer
-    visit feedback_path(feedback)
+    visit sale_transaction_feedbacks_path(feedback)
     fill_in 'Reply', with: 'Appreciate the prompt response and efforts!'
     click_button 'Post Reply'
     expect(page).to have_content('Reply posted.')
@@ -25,7 +26,7 @@ RSpec.feature 'Feedback Reply Management', type: :feature do
 
     sign_out buyer
     sign_in seller
-    visit feedback_path(feedback)
+    visit sale_transaction_feedbacks_path(feedback)
     fill_in 'Reply', with: 'We have implemented the suggested improvements.'
     click_button 'Post Reply'
     expect(page).to have_content('Reply posted.')

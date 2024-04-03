@@ -1,19 +1,23 @@
 require 'rails_helper'
+require 'benchmark'
 
 RSpec.feature "Users", type: :feature do
   let!(:test_user) { create(:user, email: "testuser@example.com", password: "password", phone: "1234567890", address: "123 main street", name: "user") }
 
   
   scenario "User signs up with valid information" do
-    visit new_user_registration_path
-    fill_in "user_email", with: "test@example.com"
-    fill_in "user_password", with: "password123"
-    fill_in "user_password_confirmation", with: "password123"
-    fill_in "user_name", with: "Test User"
-    fill_in "user_phone", with: "1234567890"
-    fill_in "user_address", with: "123 main street"
-    click_button "Sign Up"
+    elapsed = Benchmark.realtime do
+      visit new_user_registration_path
+      fill_in "user_email", with: "test@example.com"
+      fill_in "user_password", with: "password123"
+      fill_in "user_password_confirmation", with: "password123"
+      fill_in "user_name", with: "Test User"
+      fill_in "user_phone", with: "1234567890"
+      fill_in "user_address", with: "123 main street"
+      click_button "Sign Up"
+    end
     expect(page).to have_text("Welcome! You have signed up successfully.")
+    puts "User sign up with valid information took #{elapsed.round(2)} seconds"
   end
 
   scenario "User signs up with invalid information" do

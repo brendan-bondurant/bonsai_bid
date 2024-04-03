@@ -13,6 +13,7 @@ class SaleTransactionsController < ApplicationController
   end
 
   def show
+    
   end
 
 
