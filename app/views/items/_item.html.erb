@@ -61,7 +61,6 @@
         User: <%= User.find(inquiry.commenter_id).email %> <br>
         Comment: <%= inquiry.comment %> <br>
 
-        <!-- Display replies to this inquiry -->
         <% if inquiry.replies.any? %>
           <% inquiry.replies.each do |reply| %>
             <div class="reply">

@@ -6,4 +6,6 @@ class Inquiry < ApplicationRecord
   has_many :replies, as: :respondable, dependent: :destroy
   belongs_to :parent, class_name: 'Inquiry', optional: true
 
+  validates :comment, presence: true
+
 end

@@ -12,7 +12,6 @@ class RepliesController < ApplicationController
   end
   
   def create
-
     @reply = @parent.replies.build(reply_params)
     @reply.author = current_user # Assuming replies are associated with a user
 
@@ -71,7 +70,7 @@ class RepliesController < ApplicationController
         feedback_path(@parent)
       end
     elsif @parent.is_a?(Inquiry)
-      item_inquiry_path(@parent.item, @parent)
+      item_path(@parent.item)
     else
       root_path 
     end

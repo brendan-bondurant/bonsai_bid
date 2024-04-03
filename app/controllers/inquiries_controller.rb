@@ -10,10 +10,14 @@ class InquiriesController < ApplicationController
       flash[:notice] = 'Inquiry posted successfully.'
       redirect_to item_path(@item)
     else
-      # Reload the item show page with error messages
-      flash.now[:alert] = 'There was an error posting your inquiry.'
+      set_item
+      flash.now[:alert] = "Comment can't be blank"
       render 'items/show', status: :unprocessable_entity
     end
+  end
+
+  def show
+    
   end
 
   private

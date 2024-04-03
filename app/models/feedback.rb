@@ -6,7 +6,7 @@ class Feedback < ApplicationRecord
   has_many :replies, as: :respondable, dependent: :destroy
 
   validates :rating, presence: true, inclusion: { in: 1..5 }
-  validates :comment, presence: true
+  # validates :comment, presence: true
   
 
 end
