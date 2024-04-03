@@ -21,9 +21,9 @@ Bonsai Bid is a simple, yet powerful online auction platform dedicated to servin
 
 
 <br></br>
-## Getting Started
-
-## Prerequisites
+## Status
+This app is still in development, but I am happy to share the deployment with anyone who would like to look at it - Brendan
+<br></br>
 
 ### Features and Functionalities
 #### Bidding System
