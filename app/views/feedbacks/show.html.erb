@@ -4,13 +4,15 @@
 
 <div>
 
+
+
   <%= link_to "Edit this feedback", edit_feedback_path(@feedback) %> |
   <%= link_to "Back to feedbacks", feedbacks_path %>
 
   <%= button_to "Destroy this feedback", @feedback, method: :delete %>
 </div>
 
-<%= form_with(model: Reply.new, url: sale_transaction_feedback_replies_path(@sale_transaction, @feedback), local: true) do |form| %>
+<%= form_with(model: [ @sale_transaction, @feedback, Reply.new ], local: true) do |form| %>
   <div class="field">
     <%= form.label :content, "Reply" %>
     <%= form.text_area :content %>

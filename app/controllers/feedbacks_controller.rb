@@ -8,6 +8,7 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks/1 or /feedbacks/1.json
   def show
+    @sale_transaction = SaleTransaction.find(params[:sale_transaction_id])
   end
 
   # GET /feedbacks/new

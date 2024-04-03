@@ -24,4 +24,21 @@
     <%= feedback.comment %>
   </p>
 
+<% if feedback.replies.any? %>
+  <div class="replies">
+    <% feedback.replies.each do |reply| %>
+      <div class="reply">
+        <strong>Reply:</strong> <%= reply.content %> <br>
+        <strong>From:</strong> <%= reply.author.name %> <br>
+        <% if current_user == reply.author %>
+          <%= link_to 'Edit Reply', edit_sale_transaction_feedback_reply_path(feedback_id: feedback.id, id: reply.id), class: 'edit-reply-link' %>
+          <%= link_to 'Delete Reply', sale_transaction_feedback_reply_path(feedback_id: feedback.id, id: reply.id), method: :delete, class: 'delete-reply-link' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+  
+
 </div>
