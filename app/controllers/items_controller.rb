@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @category = Category.find(@item.category_id)
+    @inquiry = Inquiry.new
   end
 
   # GET /items/new

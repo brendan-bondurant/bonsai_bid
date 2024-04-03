@@ -13,4 +13,26 @@ Category :<%= @category.name %>
   <%= link_to "Back to items", items_path %>
 </div>
 
+<%= form_with model: @inquiry, url: item_inquiries_path(@item), local: true do |form| %>
+  <% if @inquiry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inquiry.errors.count, "error") %> prohibited this inquiry from being saved:</h2>
+
+      <ul>
+      <% @inquiry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :comment %><br>
+    <%= form.text_area :comment, rows: 3 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Post Inquiry" %>
+  </div>
+<% end %>
 

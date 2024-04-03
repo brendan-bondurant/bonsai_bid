@@ -7,6 +7,8 @@ class Item < ApplicationRecord
   has_many :feedbacks
   has_many :watchlists
   has_one :sale_transaction
+  has_many :inquiries
+
 
   validates :name, presence: true
   validates :description, presence: true

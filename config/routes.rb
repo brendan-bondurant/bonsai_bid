@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :watchlists
     resources :sale_transactions, only: [:index]  
   end
-  resources :items
+  resources :items do 
+    resources :inquiries
+  end
   resources :watchlists
   resources :sale_transactions, only: [:show] do
     resources :feedbacks, only: [:index, :show] do

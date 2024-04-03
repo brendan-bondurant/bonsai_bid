@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_044739) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_142103) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_044739) do
     t.index ["item_id"], name: "index_feedbacks_on_item_id"
     t.index ["sale_transaction_id"], name: "index_feedbacks_on_sale_transaction_id"
     t.index ["to_user_id"], name: "index_feedbacks_on_to_user_id"
+  end
+
+  create_table "inquiries", force: :cascade do |t|
+    t.bigint "commenter_id"
+    t.bigint "seller_id"
+    t.bigint "item_id"
+    t.text "comment"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_inquiries_on_parent_id"
   end
 
   create_table "items", force: :cascade do |t|

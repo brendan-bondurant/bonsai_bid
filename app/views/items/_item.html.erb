@@ -53,5 +53,12 @@
     <strong>Status:</strong>
     <%= item.status %>
   </p>
+  <p>
+    <strong>Inquiries:</strong>
+    <% item.inquiries.each do |comment| %>
+    User: <%= comment.commenter_id %> <br>
+    Comment: <%= comment.comment %> <br>
+    <% end %>
+  </p>
 
 </div>
