@@ -17,7 +17,7 @@
 
 ## :closed_book: Abstract
 
-Bonsai Bid is a simple, yet powerful online auction platform dedicated to serving the national community of bonsai enthusiasts. Inspired by the bustling, yet inefficient bonsai trading within private Facebook groups, Bonsai.bid is designed to streamline and elevate the buying and selling experience. Our mission is to create a user-friendly, bonsai-specific marketplace that produces unparalleled experiences for both the buyer and seller.
+Bonsai Bid is a simple, yet powerful online auction platform dedicated to serving the national community of bonsai enthusiasts. Inspired by the bustling, yet inefficient bonsai trading within private Facebook groups, Bonsai Bid is designed to streamline and elevate the buying and selling experience. Our mission is to create a user-friendly, bonsai-specific marketplace that produces unparalleled experiences for both the buyer and seller.
 
 
 <br></br>
