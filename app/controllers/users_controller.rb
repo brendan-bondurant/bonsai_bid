@@ -47,7 +47,6 @@ class UsersController < ApplicationController
   # end
 
   def edit
-    # require 'pry'; binding.pry
   end
   # PATCH/PUT /users/1 or /users/1.json
   def update

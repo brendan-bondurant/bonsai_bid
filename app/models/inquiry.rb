@@ -3,7 +3,7 @@ class Inquiry < ApplicationRecord
   belongs_to :seller, class_name: 'User'
   belongs_to :item
 
-  has_many :replies, class_name: 'Inquiry', foreign_key: :parent_id
+  has_many :replies, as: :respondable, dependent: :destroy
   belongs_to :parent, class_name: 'Inquiry', optional: true
 
 end

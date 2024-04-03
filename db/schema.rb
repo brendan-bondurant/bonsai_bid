@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_142103) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_170547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,11 +81,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_142103) do
 
   create_table "replies", force: :cascade do |t|
     t.text "content"
-    t.bigint "feedback_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["feedback_id"], name: "index_replies_on_feedback_id"
+    t.string "respondable_type", null: false
+    t.bigint "respondable_id", null: false
+    t.index ["respondable_type", "respondable_id"], name: "index_replies_on_respondable"
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
@@ -135,7 +136,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_142103) do
   add_foreign_key "feedbacks", "users", column: "to_user_id"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "users", column: "seller_id"
-  add_foreign_key "replies", "feedbacks"
   add_foreign_key "replies", "users"
   add_foreign_key "sale_transactions", "items"
   add_foreign_key "sale_transactions", "users", column: "buyer_id"

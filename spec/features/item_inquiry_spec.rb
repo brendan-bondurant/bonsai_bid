@@ -5,33 +5,32 @@ feature 'Item Inquiry and Support' do
   given(:seller) { create(:user) }
   given(:item) { create(:item, seller: seller) }
 
-  # Happy Path: Buyer Posts an Inquiry Successfully
   scenario 'Buyer communicates with seller on an item listing' do
     sign_in buyer
     visit item_path(item)
     fill_in 'Comment', with: 'Can you provide more details about the condition?'
     click_button 'Post Inquiry'
-save_and_open_page
     expect(page).to have_content('Inquiry posted successfully.')
     expect(page).to have_content('Can you provide more details about the condition?')
   end
 
-  # Happy Path: Seller Replies to an Inquiry
-  scenario 'Seller replies to an inquiry on their item listing' do
+  context 'with existing inquiry' do
     given!(:inquiry) { create(:inquiry, item: item, commenter: buyer, seller: seller) }
+      scenario 'Seller replies to an inquiry on their item listing' do
+      sign_in seller
+      visit item_path(item)
+      # click_link 'Reply' 
+      
+      fill_in 'Content', with: 'The item is in mint condition, barely used.'
+      click_button 'Reply'
+      
+save_and_open_page
 
-    sign_in seller
-    visit item_path(item)
-
-    click_link 'Reply' 
-    fill_in 'Reply', with: 'The item is in mint condition, barely used.'
-    click_button 'Post Reply'
-
-    expect(page).to have_content('Reply posted successfully.')
-    expect(page).to have_content('The item is in mint condition, barely used.')
+      expect(page).to have_content('Reply posted successfully.')
+      expect(page).to have_content('The item is in mint condition, barely used.')
+    end
   end
 
-  # Sad Path: Must be logged in to comment on an item listing
   scenario 'must be logged in to comment on an item listing' do
     visit item_path(item)
 

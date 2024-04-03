@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     resources :sale_transactions, only: [:index]  
   end
   resources :items do 
-    resources :inquiries
+    resources :inquiries do
+      resources :replies
+    end
   end
   resources :watchlists
   resources :sale_transactions, only: [:show] do

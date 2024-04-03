@@ -6,7 +6,6 @@ class InquiriesController < ApplicationController
     @inquiry = @item.inquiries.new(inquiry_params)
     @inquiry.commenter = current_user
     @inquiry.seller_id = @item.seller_id
-    require 'pry'; binding.pry
     if @inquiry.save
       flash[:notice] = 'Inquiry posted successfully.'
       redirect_to item_path(@item)
@@ -27,7 +26,6 @@ class InquiriesController < ApplicationController
   end
 
   def inquiry_params
-    require 'pry'; binding.pry
     params.require(:inquiry).permit(:comment)
   end
 end
