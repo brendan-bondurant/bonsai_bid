@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_04_155431) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_160144) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,14 +29,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_155431) do
   end
 
   create_table "bids", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.bigint "bidder_id", null: false
     t.float "bid_amount"
     t.datetime "bid_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "auction_id", null: false
+    t.index ["auction_id"], name: "index_bids_on_auction_id"
     t.index ["bidder_id"], name: "index_bids_on_bidder_id"
-    t.index ["item_id"], name: "index_bids_on_item_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -138,7 +138,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_155431) do
 
   add_foreign_key "auctions", "items"
   add_foreign_key "auctions", "users", column: "seller_id"
-  add_foreign_key "bids", "items"
+  add_foreign_key "bids", "auctions"
   add_foreign_key "bids", "users", column: "bidder_id"
   add_foreign_key "feedbacks", "items"
   add_foreign_key "feedbacks", "sale_transactions"
