@@ -11,10 +11,8 @@ RSpec.describe Auction, type: :model do
     it { should validate_presence_of(:item_id) }
     it { should validate_presence_of(:seller_id) }
     it { should validate_presence_of(:start_date) }
-    # it { should validate_presence_of(:starting_price) }
     it { should validate_numericality_of(:starting_price) }
     it { should validate_presence_of(:end_date) }
-    # it { should validate_presence_of(:bid_increment) }
     it { should validate_numericality_of(:bid_increment) }
 
   end
