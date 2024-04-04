@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :watchlist do
-    user 
+    user_profile 
     item 
   end
 end
