@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_170547) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_155431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auctions", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "seller_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.float "starting_price"
+    t.float "buy_it_now_price"
+    t.float "bid_increment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_auctions_on_item_id"
+    t.index ["seller_id"], name: "index_auctions_on_seller_id"
+  end
 
   create_table "bids", force: :cascade do |t|
     t.bigint "item_id", null: false
@@ -66,15 +80,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_170547) do
     t.string "name"
     t.text "description"
     t.text "images"
-    t.float "starting_price"
-    t.float "current_price"
-    t.float "buy_it_now_price"
-    t.datetime "start_date"
-    t.datetime "end_date"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "bid_increment"
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
@@ -128,6 +136,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_170547) do
     t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
+  add_foreign_key "auctions", "items"
+  add_foreign_key "auctions", "users", column: "seller_id"
   add_foreign_key "bids", "items"
   add_foreign_key "bids", "users", column: "bidder_id"
   add_foreign_key "feedbacks", "items"

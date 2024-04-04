@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :sales, class_name: 'SaleTransaction', foreign_key: 'seller_id'
   has_many :inquiries, foreign_key: :commenter_id
   has_many :received_inquiries, class_name: 'Inquiry', foreign_key: :seller_id
+  has_many :auctions, foreign_key: :seller_id
 
   validates :address, presence: true
   validates :name, presence: true
