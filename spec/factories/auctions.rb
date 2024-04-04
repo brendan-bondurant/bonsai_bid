@@ -1,10 +1,11 @@
 FactoryBot.define do
   factory :auction do
-    item { nil }
-    start_date { "2024-04-04 09:51:01" }
-    end_date { "2024-04-04 09:51:01" }
-    starting_price { 1.5 }
-    buy_it_now_price { 1.5 }
-    bid_increment { 1.5 }
+    association :item
+    association :seller, factory: :user
+    start_date { Faker::Time.between(from: DateTime.now - 3.days, to: DateTime.now - 2.days) }
+    end_date { Faker::Time.between(from: DateTime.now - 1.day, to: DateTime.now) }
+    starting_price { Faker::Commerce.price(range: 1.0..100.0) }
+    buy_it_now_price { Faker::Commerce.price(range: 100.0..200.0) }
+    bid_increment { Faker::Commerce.price(range: 1.0..5.0) }
   end
 end
