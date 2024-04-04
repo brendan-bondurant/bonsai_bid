@@ -22,7 +22,7 @@ Bonsai Bid is a simple, yet powerful online auction platform dedicated to servin
 
 <br></br>
 ## Status
-This app is still in development, but I am happy to share the deployment with anyone who would like to look at it - Brendan
+This app is still in development. Normally this repo is private but I have it open right now for presentation purposes, when this launches this will be private again - Brendan
 <br></br>
 
 ### Features and Functionalities
@@ -43,120 +43,11 @@ Robust search feature enabling users to find items based on keywords.
 #### Watchlist
 Users can add items to their watchlist and manage them.
 ### Database Schema
-This project uses PostgreSQL for its database, this is a simplified schema
-
-### `bids`
-
-| Column       | Data Type | Constraints                        |
-|--------------|-----------|------------------------------------|
-| `id`         | bigint    | Primary Key                        |
-| `item_id`    | bigint    | Not Null, Foreign Key (`items.id`) |
-| `bidder_id`  | bigint    | Not Null, Foreign Key (`users.id`) |
-| `bid_amount` | float     |                                    |
-| `bid_time`   | datetime  |                                    |
-| `created_at` | datetime  | Not Null                           |
-| `updated_at` | datetime  | Not Null                           |
-
-### `categories`
-
-| Column       | Data Type | Constraints                        |
-|--------------|-----------|------------------------------------|
-| `id`         | bigint    | Primary Key                        |
-| `name`       | string    |                                    |
-| `description`| text      |                                    |
-| `parent_id`  | bigint    | Foreign Key (`categories.id`)      |
-| `created_at` | datetime  | Not Null                           |
-| `updated_at` | datetime  | Not Null                           |
-
-### `feedbacks`
-
-| Column              | Data Type | Constraints                              |
-|---------------------|-----------|------------------------------------------|
-| `id`                | bigint    | Primary Key                              |
-| `item_id`           | bigint    | Not Null, Foreign Key (`items.id`)       |
-| `from_user_id`      | bigint    | Not Null, Foreign Key (`users.id`)       |
-| `to_user_id`        | bigint    | Not Null, Foreign Key (`users.id`)       |
-| `rating`            | integer   |                                          |
-| `comment`           | text      |                                          |
-| `created_at`        | datetime  | Not Null                                 |
-| `updated_at`        | datetime  | Not Null                                 |
-| `sale_transaction_id` | bigint  | Not Null, Foreign Key (`sale_transactions.id`) |
-| `reply`             | text      |                                          |
-
-### `items` 
-
-| Column             | Data Type | Constraints                             |
-|--------------------|-----------|-----------------------------------------|
-| `id`               | bigint    | Primary Key                             |
-| `seller_id`        | bigint    | Not Null, Foreign Key (`users.id`)      |
-| `category_id`      | bigint    | Not Null, Foreign Key (`categories.id`) |
-| `name`             | string    |                                         |
-| `description`      | text      |                                         |
-| `images`           | text      |                                         |
-| `starting_price`   | float     |                                         |
-| `current_price`    | float     |                                         |
-| `buy_it_now_price` | float     |                                         |
-| `start_date`       | datetime  |                                         |
-| `end_date`         | datetime  |                                         |
-| `status`           | integer   | Not Null, Default: 0                    |
-| `created_at`       | datetime  | Not Null                                |
-| `updated_at`       | datetime  | Not Null                                |
-| `bid_increment`    | float     |                                         |
-
-### `replies`
-
-| Column       | Data Type | Constraints                           |
-|--------------|-----------|---------------------------------------|
-| `id`         | bigint    | Primary Key                           |
-| `content`    | text      |                                       |
-| `feedback_id`| bigint    | Not Null, Foreign Key (`feedbacks.id`)|
-| `created_at` | datetime  | Not Null                              |
-| `updated_at` | datetime  | Not Null                              |
-
-### `sale_transactions`
-
-| Column          | Data Type | Constraints                              |
-|-----------------|-----------|------------------------------------------|
-| `id`            | bigint    | Primary Key                              |
-| `buyer_id`      | bigint    | Foreign Key (`users.id`)                 |
-| `seller_id`     | bigint    | Foreign Key (`users.id`)                 |
-| `item_id`       | bigint    | Not Null, Foreign Key (`items.id`)       |
-| `final_price`   | decimal   |                                          |
-| `created_at`    | datetime  | Not Null                                 |
-| `updated_at`    | datetime  | Not Null                                 |
-| `payment_status`| integer   | Not Null, Default: 0                     |
-
-### `users` 
-| Column                 | Data Type | Constraints               |
-|------------------------|-----------|---------------------------|
-| `id`                   | bigint    | Primary Key               |
-| `email`                | string    | Not Null, Unique          |
-| `password_digest`      | string    | Not Null                  |
-| `name`                 | string    |                           |
-| `address`              | text      |                           |
-| `phone`                | string    |                           |
-| `created_at`           | datetime  | Not Null                  |
-| `updated_at`           | datetime  | Not Null                  |
-| `encrypted_password`   | string    | Not Null, Default: ""     |
-| `reset_password_token` | string    |                           |
-| `reset_password_sent_at`| datetime |                          |
-| `remember_created_at`  | datetime  |                           |
-
-### `watchlists` 
-| Column       | Data Type | Constraints                         |
-|--------------|-----------|-------------------------------------|
-| `id`         | bigint    | Primary Key                         |
-| `user_id`    | bigint    | Not Null, Foreign Key (`users.id`)  |
-| `item_id`    | bigint    | Not Null, Foreign Key (`items.id`)  |
-| `created_at` | datetime  | Not Null                            |
-| `updated_at` | datetime  | Not Null                            |
-
+This project uses PostgreSQL for its database
 
 #### Authors
 [Brendan Bondurant](https://www.linkedin.com/in/brendanbondurant) | [Github](https://github.com/brendan-bondurant)
 <br></br>
-
-
 
 </div>
 
