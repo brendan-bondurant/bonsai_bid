@@ -2,7 +2,8 @@ class Bid < ApplicationRecord
   belongs_to :auction  
   belongs_to :bidder, class_name: 'User'
 
-  validates :auction_id, :bidder_id, :bid_amount, presence: true
+  validates :auction_id, :bid_time, :bidder_id, :bid_amount, presence: true
+  
   validates :bid_amount, numericality: { greater_than: 0 }
   validate :bid_within_auction_time
 
