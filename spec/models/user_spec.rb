@@ -6,7 +6,6 @@ RSpec.describe User, type: :model do
     it { should have_many(:bids).with_foreign_key('bidder_id') }
     it { should have_many(:feedbacks).with_foreign_key('from_user_id') }
     it { should have_many(:received_feedbacks).class_name('Feedback').with_foreign_key('to_user_id') }
-    # it { should have_many(:watchlists) }
     it { should have_many(:purchases) }
     it { should have_many(:sales) }
   end
@@ -19,14 +18,30 @@ RSpec.describe User, type: :model do
     end
 
     it 'validates uniqueness of email' do
-      existing_user = User.create!(email: 'test@example.com', password: 'password123', password_confirmation: 'password123')
+      existing_user = User.create!(
+        email: 'test@example.com',
+        password: 'password123',
+        password_confirmation: 'password123',
+        street: '123 Main St',
+        city: 'Anytown',
+        state: 'Anystate',
+        zip: '12345'
+      )
       user = User.new(email: existing_user.email)
       expect(user).to be_invalid
       expect(user.errors[:email]).to include("has already been taken")
     end
 
     it 'validates format of email' do
-      valid_email_user = User.new(email: 'test@example.com', password: 'password123')
+      valid_email_user = User.new(        
+      email: 'test@example.com',
+      password: 'password123',
+      password_confirmation: 'password123',
+      street: '123 Main St',
+      city: 'Anytown',
+      state: 'Anystate',
+      zip: '12345'
+    )
       expect(valid_email_user).to be_valid
 
       invalid_email_user = User.new(email: 'invalid_email', password: 'password123')
@@ -34,7 +49,6 @@ RSpec.describe User, type: :model do
       expect(invalid_email_user.errors[:email]).to include("is invalid")
     end
 
-    # Password
     it 'validates presence of password' do
       user = User.new(password: nil)
       expect(user).to be_invalid
@@ -48,11 +62,19 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
     end
 
+    describe 'validations' do
+      it { should validate_presence_of(:street) }
+      it { should validate_presence_of(:city) }
+      it { should validate_presence_of(:state) }
+      it { should validate_presence_of(:zip) }
+
+    end
+
 
   end
   it 'lets you view watchlist_items' do
-    user = User.create!(email: 'test@example.com', password: 'password123', password_confirmation: 'password123')    
-    other_user = User.create!(email: 'test123@example.com', password: 'password123', password_confirmation: 'password123')   
+    user = FactoryBot.create(:user)    
+    other_user = FactoryBot.create(:user)  
     listed_item = create(:item, seller: user)
     other_item = create(:item, seller: other_user)
     Watchlist.create!(user: user, item: other_item)
