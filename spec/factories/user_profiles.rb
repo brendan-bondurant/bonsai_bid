@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user_profile do
-    user { nil }
-    name { "MyString" }
-    address { "MyText" }
-    phone { "MyString" }
+    user
+    phone { Faker::Number.number(digits: 10).to_s }  
+    address {Faker::Address.street_address} 
+    name { Faker::Name.name }
   end
 end

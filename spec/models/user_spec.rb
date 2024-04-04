@@ -50,6 +50,15 @@ RSpec.describe User, type: :model do
 
 
   end
-
+  it 'lets you view watchlist_items' do
+    user = User.create!(email: 'test@example.com', password: 'password123', password_confirmation: 'password123')    
+    other_user = User.create!(email: 'test123@example.com', password: 'password123', password_confirmation: 'password123')   
+    listed_item = create(:item, seller: user)
+    other_item = create(:item, seller: other_user)
+    Watchlist.create!(user: user, item: other_item)
+    expect(user.watchlist_items.count).to eq(1)
+    expect(user.watchlist_items.class).to eq(Array)
+    expect(user.watchlist_items.first).to eq(other_item)
+  end
 
 end
