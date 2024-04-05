@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :received_inquiries, class_name: 'Inquiry', foreign_key: :seller_id
   has_many :auctions, foreign_key: :seller_id
 
-  after_create :create_user_profile
+  # after_create :create_user_profile
 
 
   validates :street, :city, :state, :zip, presence: true
@@ -34,6 +34,12 @@ class User < ApplicationRecord
   end
 
   def create_user_profile
-    build_user_profile.save(validate: false)
+    require 'pry'; binding.pry
+    build_user_profile(user_profile_attributes) if user_profile_attributes.present?
+    user_profile.save(validate: false)
+  end
+
+  def name
+    user_profile.name
   end
 end

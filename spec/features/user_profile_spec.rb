@@ -1,29 +1,43 @@
+require 'rails_helper'
+
 RSpec.feature "UserProfiles", type: :feature do
-  let!(:user) { create(:user, email: "testuser@example.com", password: "password") }
-  let!(:user_profile) { create(:user_profile, user: user, name: "Original Name") }
+  let!(:user) { create(:user) }
+  let!(:user_profile) { create(:user_profile, user: user) } 
 
   before do
-    visit new_user_session_path
-    fill_in "user_email", with: user.email
-    fill_in "user_password", with: "password"
-    click_button "Log in"
+    
+    sign_in user
   end
 
-  scenario "User updates profile with valid information" do
-    visit edit_user_profile_path(user_profile)
-    fill_in "user_profile_name", with: "Updated Name"
-    click_button "Update Profile"
+  scenario "User views their profile" do
+    visit user_profile_path(user_profile) 
+
+    expect(page).to have_text(user_profile.name)
+    expect(page).to have_text(user_profile.phone)
     
+  end
+
+  scenario "User updates their profile with valid information" do
+    visit edit_user_profile_path(user_profile) 
+
+    fill_in "Name", with: "Updated Name"
+    fill_in "Phone", with: "1234567890"
+    
+    click_button "Update Profile"
+
     expect(page).to have_text("Profile updated successfully.")
-    expect(user.user_profile.reload.name).to eq("Updated Name")
+    user_profile.reload
+    expect(user_profile.name).to eq("Updated Name")
+    expect(user_profile.phone).to eq("1234567890")
+    
   end
 
-  scenario "User updates profile with invalid information" do
-    visit edit_user_profile_path(user_profile)
-    fill_in "user_profile_phone", with: "invalid phone number"
+  scenario "User tries to update their profile with invalid information" do
+    visit edit_user_profile_path(user_profile) 
+
+    fill_in "Name", with: "" 
     click_button "Update Profile"
-    
-    expect(page).to have_text("1 error prohibited this profile from being saved:")
-    expect(page).to have_text("Phone is invalid")
+
+    expect(page).to have_text("Name can't be blank") 
   end
 end

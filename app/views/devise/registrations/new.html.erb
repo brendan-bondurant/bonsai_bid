@@ -3,12 +3,6 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <!-- Name -->
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
   <!-- Email -->
   <div class="field">
     <%= f.label :email %><br />
@@ -30,17 +24,42 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <!-- Phone -->
+  <!-- Street -->
   <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.telephone_field :phone, autocomplete: "tel" %>
+    <%= f.label :street, "Street" %><br />
+    <%= f.text_field :street, autocomplete: "street-address" %>
   </div>
 
-  <!-- Address -->
+  <!-- City -->
   <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address, autocomplete: "street-address" %>
+    <%= f.label :city, "City" %><br />
+    <%= f.text_field :city, autocomplete: "address-level2" %>
   </div>
+
+  <!-- State -->
+  <div class="field">
+    <%= f.label :state, "State" %><br />
+    <%= f.text_field :state, autocomplete: "address-level1" %>
+  </div>
+
+  <!-- Zip -->
+  <div class="field">
+    <%= f.label :zip, "Zip" %><br />
+    <%= f.text_field :zip, autocomplete: "postal-code" %>
+  </div>
+
+  <!-- Nested fields for UserProfile -->
+  <%= f.fields_for :user_profile_attributes do |profile_form| %>
+    <div class="field">
+      <%= profile_form.label :name, "Name" %><br />
+      <%= profile_form.text_field :name, autocomplete: "name" %>
+    </div>
+
+    <div class="field">
+      <%= profile_form.label :phone, "Phone" %><br />
+      <%= profile_form.text_field :phone, autocomplete: "phone" %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Sign Up" %>
