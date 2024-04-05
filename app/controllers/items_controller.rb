@@ -29,7 +29,6 @@ class ItemsController < ApplicationController
   # POST /items or /items.json
   def create
     item = Item.new(item_params)
-    item.current_price = item.starting_price
     item.seller_id = current_user.id
     respond_to do |format|
       if item.save
@@ -73,6 +72,6 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
   def item_params
-    params.require(:item).permit(:seller_id, :category_id, :name, :description, :starting_price, :current_price, :buy_it_now_price, :start_date, :bid_increment, :end_date, :status)
+    params.require(:item).permit(:seller_id, :category_id, :name, :description, :status)
   end
 end
