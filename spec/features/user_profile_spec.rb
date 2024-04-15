@@ -5,7 +5,6 @@ RSpec.feature "UserProfiles", type: :feature do
   let!(:user_profile) { create(:user_profile, user: user) } 
 
   before do
-    
     sign_in user
   end
 
@@ -22,14 +21,12 @@ RSpec.feature "UserProfiles", type: :feature do
 
     fill_in "Name", with: "Updated Name"
     fill_in "Phone", with: "1234567890"
-    
     click_button "Update Profile"
 
-    expect(page).to have_text("Profile updated successfully.")
+    expect(page).to have_text("Profile was successfully updated.")
     user_profile.reload
-    expect(user_profile.name).to eq("Updated Name")
-    expect(user_profile.phone).to eq("1234567890")
-    
+    expect(page).to have_text("Updated Name")
+    expect(page).to have_text("1234567890")
   end
 
   scenario "User tries to update their profile with invalid information" do

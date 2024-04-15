@@ -4,33 +4,34 @@ class UserProfilesController < ApplicationController
 
   # GET /profile
   def show
-    # Your logic here
-    # Typically, you might not need a show action since the profile could be viewed on the user's account page
+    @user_profile = UserProfile.find(params[:id])
   end
+  
 
   # GET /profile/edit
   def edit
-    # Edit action for the user profile
+
   end
 
   # PATCH/PUT /profile
   def update
-    require 'pry'; binding.pry
-    if @user_profile.update(user_profile_params)
-      redirect_to profile_path, notice: 'Profile was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @user_profile.update(user_profile_params)
+        format.html { redirect_to user_profile_path(@user_profile), notice: 'Profile was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user_profile }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @user_profile.errors, status: :unprocessable_entity }
+      end
     end
   end
+  
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user_profile
-      # Ensures the user can only access their own profile
       @user_profile = current_user.user_profile
     end
 
-    # Only allow a list of trusted parameters through.
     def user_profile_params
       params.require(:user_profile).permit(:name, :phone)
     end
