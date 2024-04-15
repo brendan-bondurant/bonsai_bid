@@ -1,0 +1,41 @@
+<%= form_for @auction do |f| %>
+  <% if @auction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@auction.errors.count, "error") %> prevented this auction from being saved:</h2>
+      <ul>
+      <% @auction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :item_id, "Item" %>
+    <%= f.collection_select :item_id, Item.all, :id, :name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :starting_price %>
+    <%= f.number_field :starting_price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bid_increment %>
+    <%= f.number_field :bid_increment %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Auction" %>
+  </div>
+<% end %>

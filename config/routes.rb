@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
   resources :feedbacks
+  resources :auctions
   resources :user_profiles
   
 
