@@ -21,7 +21,7 @@ class AuctionsController < ApplicationController
 
   # GET /auctions/1
   def show
-    # You can handle bid creation here as well if your app allows direct bidding from the auction page
+    @bid = @auction.bids.build 
   end
 
   # Additional actions (edit, update, destroy) can be implemented if needed

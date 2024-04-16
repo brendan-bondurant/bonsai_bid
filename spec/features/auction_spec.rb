@@ -25,9 +25,9 @@ RSpec.feature "Auctions", type: :feature do
 
   scenario "User places a bid on an auction" do
     visit auction_path(auction)
-    fill_in "Bid Amount", with: auction.starting_price + auction.bid_increment
+    fill_in "Bid amount", with: auction.starting_price + auction.bid_increment
     click_button "Place Bid"
-
+    
     expect(page).to have_text("Bid was successfully placed.")
     expect(page).to have_text(auction.starting_price + auction.bid_increment)
   end

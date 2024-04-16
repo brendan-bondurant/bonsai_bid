@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     end
   end
   resources :feedbacks
-  resources :auctions
+  resources :auctions do 
+    resources :bids
+  end
   resources :user_profiles
   
 

@@ -7,6 +7,15 @@ class Auction < ApplicationRecord
   validates :starting_price, :bid_increment, numericality: { greater_than_or_equal_to: 0 }
   validate :end_date_after_start_date
 
+  def current_highest_bid
+    highest_bid = bids.order(bid_amount: :desc).first
+    highest_bid ? highest_bid.bid_amount : "no bids"
+  end
+
+  def bidding_open?
+    now = Time.now
+    start_date <= now && now <= end_date
+  end
 
 private
 
