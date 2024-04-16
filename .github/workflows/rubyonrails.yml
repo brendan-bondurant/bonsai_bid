@@ -32,7 +32,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1.146.0 # Updated to use a version tag
         with:
-          ruby-version: '3.0.2' # Specify your Ruby version if needed
+          ruby-version: '3.2.2' # Specify your Ruby version if needed
           bundler-cache: true
       - name: Set up database schema
         run: bin/rails db:schema:load
@@ -47,7 +47,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1.146.0 # Updated to use a version tag
         with:
-          ruby-version: '3.0.2' # Specify your Ruby version if needed
+          ruby-version: '3.2.2' # Specify your Ruby version if needed
           bundler-cache: true
       - name: Update and run bundler-audit
         run: bundle exec bundler-audit --update
