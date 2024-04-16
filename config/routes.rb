@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'contacts/new'
+  get 'contacts/create'
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   root "home#index"
@@ -26,6 +28,8 @@ Rails.application.routes.draw do
     resources :bids
   end
   resources :user_profiles
+  get 'contact_page', to: 'contacts#new', as: 'contact_page'
+  post 'contact_page', to: 'contacts#create'
   
 
   get "up" => "rails/health#show", as: :rails_health_check
