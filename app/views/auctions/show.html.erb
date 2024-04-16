@@ -1,0 +1,42 @@
+<p>
+  <strong>Item:</strong>
+  <%= @auction.item.name %>
+</p>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @auction.start_date.strftime("%B %d, %Y") %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @auction.end_date.strftime("%B %d, %Y") %>
+</p>
+
+<p>
+  <strong>Starting Price:</strong>
+  <%= @auction.starting_price %>
+</p>
+
+<p>
+  <strong>Current Bid:</strong>
+  <%= @auction.current_highest_bid %>
+</p>
+
+<% if @auction.bidding_open? %>
+  <%= form_with(model: [@auction, @bid]) do |form| %>
+  <div class="field">
+      <% if current_user %>
+    <%= form.hidden_field :bidder_id, value: current_user.id %>
+  <% end %>
+    <%= form.label :bid_amount %>
+    <%= form.number_field :bid_amount %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Place Bid" %>
+  </div>
+<% end %>
+
+<% else %>
+  <p>Bidding is closed for this auction.</p>
+<% end %>

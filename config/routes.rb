@@ -1,20 +1,38 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get 'contacts/new'
+  get 'contacts/create'
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
 
   get '/search', to: 'search#index', as: 'search'
   resources :users do
     get 'dashboard', on: :member
+    get 'profile', on: :member
+    resources :watchlists
+    resources :sale_transactions, only: [:index]  
   end
-  resources :items
+  resources :items do 
+    resources :inquiries do
+      resources :replies
+    end
+  end
   resources :watchlists
+  resources :sale_transactions, only: [:show] do
+    resources :feedbacks, only: [:index, :show] do
+      resources :replies
+    end
+  end
   resources :feedbacks
-
+  resources :auctions do 
+    resources :bids
+  end
+  resources :user_profiles
+  get 'contact_page', to: 'contacts#new', as: 'contact_page'
+  post 'contact_page', to: 'contacts#create'
+  
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+
 end

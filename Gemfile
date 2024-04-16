@@ -30,7 +30,10 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
+# Gemfile
+gem 'redis'
+gem 'redis-rails' # for caching
+gem 'sidekiq' # for background jobs using Redis
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -63,10 +66,12 @@ group :development, :test do
   gem 'pry'
   gem 'capybara'
   gem 'launchy'
-  # gem 'bullet' not sure if will need, if need, ask if it is approved
+  gem 'bullet'
+
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'brakeman', require: false
+  gem 'faker'
   gem 'bundler-audit', require: false
   # gem 'rubocop', require: false
 
@@ -85,11 +90,13 @@ group :development do
 end
 
 group :test do
-  gem 'faker'
+
   gem 'webmock'
   gem 'vcr'
   gem 'simplecov'
   gem 'shoulda-matchers', '~> 6.0'
   gem 'rails-controller-testing'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 

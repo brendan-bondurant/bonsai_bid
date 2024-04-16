@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :bid do
-    item { nil }
-    bidder { nil }
-    bid_amount { 1.5 }
-    bid_time { "2024-02-16 09:29:19" }
+    association :auction
+    association :bidder, factory: :user
+    bid_amount { Faker::Commerce.price(range: 1.0..100.0) }
   end
 end

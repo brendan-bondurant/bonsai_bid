@@ -6,9 +6,10 @@
   <% @watchlists.each do |watchlist| %>
     <%= render watchlist %>
     <p>
-      <%= link_to "Show this watchlist", watchlist %>
+      <%= link_to "Show this watchlist", watchlist %> <br>
+      <%= link_to "Delete this watchlist", watchlist_path(watchlist), method: :delete %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New watchlist", new_watchlist_path %>
+

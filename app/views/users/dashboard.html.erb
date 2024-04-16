@@ -1,12 +1,12 @@
-<%= @user.name %>'s Dashboard
+<%= @user.name %>'s Dashboard <br>
 
-items
+items <br>
 <% @user.items.each do |item| %>
     <%= item.name %> <br>
   <% end %>
 
 
-watchlist
-<% @watchlists.each do |fav| %>
-    <%= fav.name %> <br>
+watchlist <br>
+<% @watchlists.each do |watchlist| %>
+        <%= link_to watchlist.name, item_path(watchlist.id) %> <br>
   <% end %>

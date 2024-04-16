@@ -1,0 +1,16 @@
+<!-- app/views/contacts/new.html.erb -->
+<h1>Contact Us</h1>
+
+<%= form_with(url: contact_page_path, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email, id: 'Email' %>
+  </div>
+  <div class="field">
+    <%= form.label :message, "Message" %>
+    <%= form.text_area :message, id: 'Message' %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Send', id: 'Send' %>
+  </div>
+<% end %>

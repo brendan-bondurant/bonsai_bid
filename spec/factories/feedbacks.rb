@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :feedback do
-    item { nil }
-    from_user { nil }
-    to_user { nil }
-    rating { 1 }
-    comment { "MyText" }
-    feedback_time { "2024-02-16 09:29:28" }
+    association :item
+    association :from_user, factory: :user
+    association :to_user, factory: :user
+    association :sale_transaction
+    rating { Faker::Number.between(from: 1, to: 5) }
+    comment { Faker::Lorem.sentence(word_count: 10) }
   end
 end

@@ -24,34 +24,41 @@
     <%= item.images %>
   </p>
 
-  <p>
-    <strong>Starting price:</strong>
-    <%= item.starting_price %>
-  </p>
-
-  <p>
-    <strong>Current price:</strong>
-    <%= item.current_price %>
-  </p>
-
-  <p>
-    <strong>Buy it now price:</strong>
-    <%= item.buy_it_now_price %>
-  </p>
-
-  <p>
-    <strong>Start date:</strong>
-    <%= item.start_date %>
-  </p>
-
-  <p>
-    <strong>End date:</strong>
-    <%= item.end_date %>
-  </p>
 
   <p>
     <strong>Status:</strong>
     <%= item.status %>
   </p>
+  <p>
+  <% if item.inquiries.any? %>
+    <strong>Inquiries:</strong>
+    <% item.inquiries.each do |inquiry| %>
+      <div class="inquiry">
+        User: <%= User.find(inquiry.commenter_id).email %> <br>
+        Comment: <%= inquiry.comment %> <br>
 
+        <% if inquiry.replies.any? %>
+          <% inquiry.replies.each do |reply| %>
+            <div class="reply">
+
+              User: <%= User.find(reply.user_id).email %> <br>
+              Comment: <%= reply.content %> <br>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="reply-form">
+        <%= form_with model: inquiry.replies.build, scope: :reply, url: item_inquiry_replies_path(item, inquiry), local: true do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, rows: 2 %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Reply" %>
+  </div>
+<% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
