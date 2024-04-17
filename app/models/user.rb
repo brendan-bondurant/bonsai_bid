@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable,  :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :validatable
+          :recoverable, :rememberable, :validatable, :timeoutable
   
   has_one :user_profile, dependent: :destroy
   accepts_nested_attributes_for :user_profile
@@ -33,11 +33,10 @@ class User < ApplicationRecord
     favorites
   end
 
-  def create_user_profile
-    require 'pry'; binding.pry
-    build_user_profile(user_profile_attributes) if user_profile_attributes.present?
-    user_profile.save(validate: false)
-  end
+  # def create_user_profile
+  #   build_user_profile(user_profile_attributes) if user_profile_attributes.present?
+  #   user_profile.save(validate: false)
+  # end
 
   def name
     user_profile.name
