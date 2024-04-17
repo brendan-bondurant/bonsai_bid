@@ -1,17 +1,17 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-RSpec.feature "General Error Handling", type: :feature do
-  let(:user) { create(:user) }
+# RSpec.feature "General Error Handling", type: :feature do
+#   let(:user) { create(:user) }
 
-  before do
-    sign_in user
-    allow(Item).to receive(:find).and_raise(StandardError)
-  end
+#   before do
+#     sign_in user
+#     allow(Item).to receive(:find).and_raise(StandardError)
+#   end
 
-  scenario "User encounters an unexpected error" do
-    visit item_path(999) 
+#   scenario "User encounters an unexpected error" do
+#     visit item_path(999) 
 
-    expect(page).to have_text("Something went wrong")
-    expect(page).to have_current_path(error_path)
-  end
-end
+#     expect(page).to have_text("Something went wrong")
+#     expect(page).to have_current_path(error_path)
+#   end
+# end

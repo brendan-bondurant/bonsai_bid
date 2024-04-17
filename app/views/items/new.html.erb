@@ -3,7 +3,7 @@
 <!-- app/views/items/new.html.erb -->
 
 <%= form_with model: @item, local: true do |form| %>
-  <% if @item.errors.any? %>
+  <% if @item && @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
@@ -30,30 +30,6 @@
   <%= form.select :category_id, Category.all.map { |category| [category.name, category.id] }, {}, { id: :item_category_id, include_blank: "Select Category" } %>
 </div>
 
-  <div class="field">
-    <%= form.label :starting_price %>
-    <%= form.text_field :starting_price, id: :item_starting_price %>
-  </div>
-
-    <div>
-    <%= form.label :bid_increment, style: "display: block" %>
-    <%= form.text_field :bid_increment, id: :item_bid_increment %>
-  </div>
-  
-  <div class="field">
-    <%= form.label :buy_it_now_price %>
-    <%= form.text_field :buy_it_now_price, id: :item_buy_it_now_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.datetime_field :start_date, id: :item_start_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.datetime_field :end_date, id: :item_end_date %>
-  </div>
 
   <div class="actions">
     <%= form.submit "Create Item" %>

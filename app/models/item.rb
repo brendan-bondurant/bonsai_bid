@@ -14,4 +14,12 @@ class Item < ApplicationRecord
   validates :status, presence: true, inclusion: { in: %w(listed active sold ended) }
   validates :status, presence: true
   
+  def category_name
+    category = Category.find_by(id: category_id)
+    if category
+      category.name
+    else
+      'no category assigned'
+    end
+  end
 end

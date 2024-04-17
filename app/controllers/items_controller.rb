@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  rescue_from StandardError, with: :handle_standard_error
+  # rescue_from StandardError, with: :handle_standard_error
   before_action :set_item, only: %i[ show edit update destroy ]
 
   # GET /items or /items.json
@@ -16,6 +16,10 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
+    if current_user == nil
+      flash[:alert] = "You must be logged in."
+      redirect_to new_user_session_path
+    end
     @item = Item.new
   end
 
@@ -29,15 +33,15 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    item = Item.new(item_params)
-    item.seller_id = current_user.id
+    @item = Item.new(item_params)
+    @item.seller_id = current_user.id
     respond_to do |format|
-      if item.save
-        format.html { redirect_to item_url(item), notice: "Item was successfully created." }
+      if @item.save
+        format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: item }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: item.errors, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
     
@@ -76,7 +80,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:seller_id, :category_id, :name, :description, :status)
   end
 
-  def handle_standard_error
-    redirect_to error_path, alert: 'Something went wrong'
-  end
+  # def handle_standard_error
+  #   redirect_to error_path, alert: 'Something went wrong'
+  # end
 end

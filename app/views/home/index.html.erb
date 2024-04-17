@@ -1,3 +1,7 @@
+<% if user_signed_in? %>
+<%= link_to 'dashboard', dashboard_user_path(@user) %>
+<% end %>
+
 <h1>Search</h1>
 
 <%= form_tag(search_path, method: :get) do %>

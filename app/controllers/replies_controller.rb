@@ -2,9 +2,9 @@ class RepliesController < ApplicationController
   before_action :set_parent_object
   before_action :set_reply, only: [:edit, :update, :destroy]
 
-  def index
-    @replies = @parent.replies
-  end
+  # def index
+  #   @replies = @parent.replies
+  # end
   
   def new
 

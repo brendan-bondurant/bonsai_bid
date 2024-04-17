@@ -130,4 +130,31 @@ RSpec.feature "Items", type: :feature do
     expect(page).to have_link('Edit')
     expect(page).to have_link("Remove #{item.name}")
   end
+
+
+
+  scenario "User views all items" do
+    user_with_items 
+    visit items_path
+    Item.all.each do |item|
+      expect(page).to have_text(item.name)
+      expect(page).to have_text(item.description)
+    end
+  end
+
+  scenario "User submits invalid data for new item" do
+    sign_in_w_form
+    visit new_item_path
+    fill_in "Name", with: ""  
+    click_button "Create Item"
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Category must exist")
+    expect(page).to have_content("Description can't be blank")
+  end
+  
+  scenario "Unauthenticated user tries to create a new item" do
+    visit new_item_path
+    expect(current_path).to eq(new_user_session_path) 
+    expect(page).to have_content("You must be logged in")
+  end  
 end
