@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.feature "Auction Bid Error Handling", type: :feature do
   let(:user) { create(:user) }
   let(:auction) { create(:auction) }

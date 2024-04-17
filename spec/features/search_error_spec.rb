@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.feature "Item Search Handling", type: :feature do
   let(:user) { create(:user) }
 

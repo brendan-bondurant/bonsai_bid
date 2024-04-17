@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.feature "General Error Handling", type: :feature do
   let(:user) { create(:user) }
 
@@ -7,7 +9,7 @@ RSpec.feature "General Error Handling", type: :feature do
   end
 
   scenario "User encounters an unexpected error" do
-    visit item_path(999) # This ID triggers an error due to the mocked `find` method
+    visit item_path(999) 
 
     expect(page).to have_text("Something went wrong")
     expect(page).to have_current_path(error_path)

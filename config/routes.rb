@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :user_profiles
   get 'contact_page', to: 'contacts#new', as: 'contact_page'
   post 'contact_page', to: 'contacts#create'
+  get '/error', to: 'errors#show', as: 'error'
   
 
   get "up" => "rails/health#show", as: :rails_health_check

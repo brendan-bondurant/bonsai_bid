@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  rescue_from StandardError, with: :handle_standard_error
   before_action :set_item, only: %i[ show edit update destroy ]
 
   # GET /items or /items.json
@@ -39,6 +40,7 @@ class ItemsController < ApplicationController
         format.json { render json: item.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
 
@@ -69,7 +71,12 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
   def item_params
     params.require(:item).permit(:seller_id, :category_id, :name, :description, :status)
+  end
+
+  def handle_standard_error
+    redirect_to error_path, alert: 'Something went wrong'
   end
 end
