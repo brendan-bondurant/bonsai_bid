@@ -19,7 +19,7 @@ class WatchlistsController < ApplicationController
 
   def create
     # @watchlist = current_user.watchlists.build(watchlist_params)
-    @watchlist = Watchlist.new(user_id: current_user.id, item_id: params[:item_id])
+    @watchlist = Watchlist.new(user_id: current_user.id, auction_id: params[:auction_id])
     respond_to do |format|
     
     

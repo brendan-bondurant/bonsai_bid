@@ -16,23 +16,28 @@
   </div>
 
   <div class="field">
-    <%= f.label :start_date %>
-    <%= f.date_field :start_date %>
+    <%= f.label :start_date, "Start Time" %>
+    <%= f.datetime_local_field :start_date, value: f.object.start_date&.strftime('%Y-%m-%dT%H:%M'), step: 1 %>
   </div>
 
   <div class="field">
-    <%= f.label :end_date %>
-    <%= f.date_field :end_date %>
+    <%= f.label :end_date, "End Time" %>
+    <%= f.datetime_local_field :end_date, value: f.object.end_date&.strftime('%Y-%m-%dT%H:%M'), step: 1 %>
   </div>
 
   <div class="field">
     <%= f.label :starting_price %>
-    <%= f.number_field :starting_price %>
+    <%= f.number_field :starting_price, step: 0.01 %>
   </div>
 
   <div class="field">
     <%= f.label :bid_increment %>
-    <%= f.number_field :bid_increment %>
+    <%= f.number_field :bid_increment, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.select :status, Auction.statuses.keys.map { |status| [status.titleize, status] }, { include_blank: 'Select Status' }, { class: 'select' } %>
   </div>
 
   <div class="actions">

@@ -9,5 +9,5 @@
 
 <h2>watchlist</h2>
 <% @watchlists.each do |watchlist| %>
-  <%= link_to watchlist.name, item_path(watchlist.id) %> <br>
+  <%= link_to watchlist.item.name, auction_path(watchlist.id) %> <br>
 <% end %>

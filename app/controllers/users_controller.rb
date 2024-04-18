@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @watchlists = current_user.watchlist_items
+    @watchlists = current_user.watchlist_auctions
   end
 
   def profile

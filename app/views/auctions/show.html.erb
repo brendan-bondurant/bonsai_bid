@@ -40,3 +40,9 @@
 <% else %>
   <p>Bidding is closed for this auction.</p>
 <% end %>
+
+  <% if current_user && current_user&.id != @auction.seller_id %>
+    <div class="mb-3">
+      <%= link_to 'Watch this Auction', watchlists_path(auction_id: @auction.id), method: :post, class: "btn btn-info watch-auction-button" %> 
+    </div>
+  <% end %>

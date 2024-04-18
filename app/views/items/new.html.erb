@@ -1,9 +1,7 @@
-<h1>New item</h1>
-
-<%= form_with model: @item, local: true do |form| %>
+<%= form_for @item do |f| %>
   <% if @item.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prevented this item from being saved:</h2>
       <ul>
       <% @item.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,28 +11,43 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :item_name, class: 'form-control' %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :item_description, class: 'form-control' %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :category_id %>
-    <%= form.select :category_id, Category.where(parent_id: nil).map { |c| [c.name, c.id] },
-                    {include_blank: 'Select Category'},
-                    {id: 'item_category_id', class: 'form-control'} %>
+    <%= f.label :category_id, "Category" %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: true %>
   </div>
 
-  <div class="field" id="subcategory_field">
-    <!-- Subcategory select will be inserted here by JavaScript -->
+  <div class="field">
+    <%= f.label :images, "Images" %>
+    <%= f.file_field :images, multiple: true, accept: 'image/png,image/gif,image/jpeg' %>
   </div>
+
+  <%= f.fields_for :auction do |a| %>
+    <div class="field">
+      <%= a.label :status %>
+      <%= a.select :status, Auction.statuses.keys.map { |status| [status.titleize, status] }, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= a.label :start_date, "Start Time" %>
+      <%= a.datetime_field :start_date %>
+    </div>
+
+    <div class="field">
+      <%= a.label :end_date, "End Time" %>
+      <%= a.datetime_field :end_date %>
+    </div>
+  <% end %>
 
   <div class="actions">
-    <%= form.submit "Create Item", class: 'btn btn-primary' %>
+    <%= f.submit "Create Item and Auction" %>
   </div>
 <% end %>
-
