@@ -57,6 +57,17 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # app/controllers/categories_controller.rb
+
+  def subcategories
+    category = Category.find(params[:id])
+    subcategories = category.children
+
+    render json: subcategories
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category

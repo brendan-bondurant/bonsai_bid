@@ -5,6 +5,17 @@ Rails.application.routes.draw do
 
   root "home#index"
 
+  # config/routes.rb
+
+# routes.rb
+resources :categories do
+  member do
+    get 'subcategories'
+  end
+end
+
+
+
   get '/search', to: 'search#index', as: 'search'
   resources :users do
     get 'dashboard', on: :member
