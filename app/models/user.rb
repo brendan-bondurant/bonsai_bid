@@ -24,11 +24,11 @@ class User < ApplicationRecord
   validates :zip, format: { with: /\A\d{5}(-\d{4})?\z/, message: "invalid zip code" }
   
 
-  def watchlist_items
+  def watchlist_auctions
     favorites = []
     self.watchlists.each do |favs|
-      item = Item.find(favs.item_id)
-      favorites << item
+      auction = Auction.find(favs.auction_id)
+      favorites << auction
     end
     favorites
   end

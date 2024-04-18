@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_18_155537) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_160530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_155537) do
     t.float "bid_increment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["item_id"], name: "index_auctions_on_item_id"
     t.index ["seller_id"], name: "index_auctions_on_seller_id"
   end
@@ -64,11 +65,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_155537) do
   create_table "inquiries", force: :cascade do |t|
     t.bigint "commenter_id"
     t.bigint "seller_id"
-    t.bigint "item_id"
     t.text "comment"
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "auction_id"
+    t.index ["auction_id"], name: "index_inquiries_on_auction_id"
     t.index ["parent_id"], name: "index_inquiries_on_parent_id"
   end
 
@@ -99,13 +101,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_155537) do
   create_table "sale_transactions", force: :cascade do |t|
     t.bigint "buyer_id"
     t.bigint "seller_id"
-    t.bigint "item_id"
     t.decimal "final_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "payment_status", default: 0, null: false
+    t.bigint "auction_id"
+    t.index ["auction_id"], name: "index_sale_transactions_on_auction_id"
     t.index ["buyer_id"], name: "index_sale_transactions_on_buyer_id"
-    t.index ["item_id"], name: "index_sale_transactions_on_item_id"
     t.index ["seller_id"], name: "index_sale_transactions_on_seller_id"
   end
 
@@ -136,11 +138,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_155537) do
   end
 
   create_table "watchlists", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["item_id"], name: "index_watchlists_on_item_id"
+    t.bigint "auction_id"
+    t.index ["auction_id"], name: "index_watchlists_on_auction_id"
     t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
@@ -155,10 +157,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_155537) do
   add_foreign_key "items", "categories"
   add_foreign_key "items", "users", column: "seller_id"
   add_foreign_key "replies", "users"
-  add_foreign_key "sale_transactions", "items"
+  add_foreign_key "sale_transactions", "auctions"
   add_foreign_key "sale_transactions", "users", column: "buyer_id"
   add_foreign_key "sale_transactions", "users", column: "seller_id"
   add_foreign_key "user_profiles", "users", on_delete: :cascade
-  add_foreign_key "watchlists", "items"
+  add_foreign_key "watchlists", "auctions"
   add_foreign_key "watchlists", "users"
 end

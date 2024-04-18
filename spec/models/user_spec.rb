@@ -32,16 +32,16 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#watchlist_items' do
-    it 'returns an array of items on the watchlist' do
-      user = FactoryBot.create(:user)    
-      other_user = FactoryBot.create(:user)  
-      listed_item = FactoryBot.create(:item, seller: user)
-      other_item = FactoryBot.create(:item, seller: other_user)
-      FactoryBot.create(:watchlist, user: user, item: other_item)
-      expect(user.watchlist_items.count).to eq(1)
-      expect(user.watchlist_items.class).to eq(Array)
-      expect(user.watchlist_items.first).to eq(other_item)
+  describe '#watchlist_auctions' do
+    it 'returns an array of auctions on the watchlist' do
+      user = FactoryBot.create(:user)
+      other_user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item, seller: other_user)
+      auction = FactoryBot.create(:auction, item: item)
+      FactoryBot.create(:watchlist, user: user, auction: auction)
+      expect(user.watchlist_auctions.count).to eq(1)
+      expect(user.watchlist_auctions.class).to eq(Array)
+      expect(user.watchlist_auctions.first).to eq(auction)
     end
   end
 end
