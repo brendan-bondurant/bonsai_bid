@@ -65,7 +65,7 @@ class WatchlistsController < ApplicationController
     end
 
     def watchlist_params
-      params.require(:watchlists).permit(:item_id)
+      params.require(:watchlists).permit(:auction_id)
     end
 
 end
