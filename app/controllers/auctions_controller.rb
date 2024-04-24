@@ -21,7 +21,8 @@ class AuctionsController < ApplicationController
 
   # GET /auctions/1
   def show
-    @bid = @auction.bids.build 
+    @bid = @auction.bids.build
+    @inquiry = Inquiry.new(auction: @auction)
   end
 
   # Additional actions (edit, update, destroy) can be implemented if needed

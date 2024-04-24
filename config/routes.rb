@@ -24,9 +24,9 @@ end
     resources :sale_transactions, only: [:index]  
   end
   resources :items do 
-    resources :inquiries do
-      resources :replies
-    end
+    # resources :inquiries do
+    #   resources :replies
+    # end
   end
   resources :watchlists
   resources :sale_transactions, only: [:show] do
@@ -37,6 +37,9 @@ end
   resources :feedbacks
   resources :auctions do 
     resources :bids
+    resources :inquiries do
+      resources :replies
+    end
   end
   resources :user_profiles
   get 'contact_page', to: 'contacts#new', as: 'contact_page'

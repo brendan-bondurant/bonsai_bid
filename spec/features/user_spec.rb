@@ -105,9 +105,9 @@ RSpec.feature "Users", type: :feature do
     sign_in test_user
     FactoryBot.create_list(:watchlist, 4, user: test_user)
     visit dashboard_user_path(test_user)
-    
-    test_user.watchlist_items.each do |item|
-      expect(page).to have_text(item.name)
+
+    test_user.watchlist_auctions.each do |auction|
+      expect(page).to have_text(auction.item.name)
     end
   end
 

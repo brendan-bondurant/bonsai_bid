@@ -4,8 +4,9 @@ RSpec.feature 'Feedback Reply Management', type: :feature do
   let!(:seller) { create(:user) }
   let!(:buyer) { create(:user) }
   let!(:item) { create(:item, seller: seller) }
-  let!(:sale_transaction) { create(:sale_transaction, seller: seller, buyer: buyer, item: item) }
-  let!(:feedback) { create(:feedback, sale_transaction: sale_transaction, from_user: buyer, to_user: seller, item: item, comment: "Needs improvement") }
+  let!(:auction) { FactoryBot.create(:auction, item: item, seller: seller, starting_price: 100, bid_increment: 5, status: 'listed') }
+  let!(:sale_transaction) { create(:sale_transaction, seller: seller, buyer: buyer, auction: auction) }
+  let!(:feedback) { create(:feedback, sale_transaction: sale_transaction, from_user: buyer, to_user: seller, auction: auction, comment: "Needs improvement") }
 
   let!(:reply) { create(:reply, respondable: feedback, author: seller, content: "Initial reply content") }
   

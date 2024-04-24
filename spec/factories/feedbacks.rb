@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :feedback do
-    association :item
+    association :auction
     association :from_user, factory: :user
     association :to_user, factory: :user
     association :sale_transaction
