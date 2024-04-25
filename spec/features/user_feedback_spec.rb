@@ -49,7 +49,6 @@ feature 'Feedback and Transaction Features' do
     click_link 'Edit Feedback'
     fill_in 'Comment', with: '' 
     click_button 'Update Feedback'
-    save_and_open_page
     expect(page).to have_content("Comment can't be blank") 
     expect(page).to have_content('Initial comment') 
   end

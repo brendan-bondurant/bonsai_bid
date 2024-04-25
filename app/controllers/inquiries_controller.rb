@@ -28,9 +28,6 @@ class InquiriesController < ApplicationController
 
   def set_auction
     @auction = Auction.find(params[:auction_id])
-  rescue ActiveRecord::RecordNotFound
-    flash[:alert] = 'auction not found.'
-    redirect_to auctions_path
   end
 
   def inquiry_params
