@@ -37,15 +37,15 @@ class WatchlistsController < ApplicationController
 
   # PATCH/PUT /watchlists/1 or /watchlists/1.json
   def update
-    respond_to do |format|
-      if @watchlist.update(watchlist_params)
-        format.html { redirect_to watchlist_url(@watchlist), notice: "Watchlist was successfully updated." }
-        format.json { render :show, status: :ok, location: @watchlist }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @watchlist.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @watchlist.update(watchlist_params)
+    #     format.html { redirect_to watchlist_url(@watchlist), notice: "Watchlist was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @watchlist }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @watchlist.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /watchlists/1 or /watchlists/1.json

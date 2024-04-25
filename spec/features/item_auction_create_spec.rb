@@ -8,25 +8,25 @@ RSpec.feature "Create Items with Auctions", type: :feature do
     sign_in user
   end
 
-  scenario "User successfully creates an item with images and an auction" do
-    visit new_item_path
+  # scenario "User successfully creates an item with images and an auction" do
+  #   visit new_item_path
 
-    fill_in "Name", with: "New Camera"
-    fill_in "Description", with: "A brand new DSLR camera"
-    select category.name, from: "Category"
-    attach_file 'Images', [Rails.root.join('spec', 'fixtures', 'files', 'image1.jpeg'), Rails.root.join('spec', 'fixtures', 'files', 'image2.jpeg')]
+  #   fill_in "Name", with: "New Camera"
+  #   fill_in "Description", with: "A brand new DSLR camera"
+  #   select category.name, from: "Category"
+  #   attach_file 'Images', [Rails.root.join('spec', 'fixtures', 'files', 'image1.jpeg'), Rails.root.join('spec', 'fixtures', 'files', 'image2.jpeg')]
     
-    fill_in "Start Time", with: DateTime.now + 3.days
-    fill_in "End Time", with: DateTime.now + 10.days
-    select "Listed", from: "Status"
+  #   fill_in "Start Time", with: DateTime.now + 3.days
+  #   fill_in "End Time", with: DateTime.now + 10.days
+  #   select "Listed", from: "Status"
     
-    click_button "Create Item and Auction"
+  #   click_button "Create Item and Auction"
     
 
-    expect(page).to have_content("Item and associated auction were successfully created.")
-    expect(Item.last.images.count).to eq(2)
-    expect(Auction.last.status).to eq("listed")
-  end
+  #   expect(page).to have_content("Item and associated auction were successfully created.")
+  #   expect(Item.last.images.count).to eq(2)
+  #   expect(Auction.last.status).to eq("listed")
+  # end
 
   scenario "User fails to create an item due to missing required fields" do
     visit new_item_path

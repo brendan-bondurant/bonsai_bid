@@ -13,7 +13,7 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks/new
   def new
-    @feedback = Feedback.new
+    # @feedback = Feedback.new
   end
 
   # GET /feedbacks/1/edit
@@ -22,16 +22,16 @@ class FeedbacksController < ApplicationController
 
   # POST /feedbacks or /feedbacks.json
   def create
-    @feedback = Feedback.new(feedback_params)
-    respond_to do |format|
-      if @feedback.save
-        format.html { redirect_to feedback_url(@feedback), notice: "Feedback was successfully created." }
-        format.json { render :show, status: :created, location: @feedback }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
-      end
-    end
+  #   @feedback = Feedback.new(feedback_params)
+  #   respond_to do |format|
+  #     if @feedback.save
+  #       format.html { redirect_to feedback_url(@feedback), notice: "Feedback was successfully created." }
+  #       format.json { render :show, status: :created, location: @feedback }
+  #     else
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @feedback.errors, status: :unprocessable_entity }
+  #     end
+  #   end
   end
 
   # PATCH/PUT /feedbacks/1 or /feedbacks/1.json

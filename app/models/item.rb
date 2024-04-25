@@ -7,12 +7,12 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   
-  def category_name
-    category = Category.find_by(id: category_id)
-    if category
-      category.name
-    else
-      'no category assigned'
-    end
-  end
+  # def category_name
+  #   category = Category.find_by(id: category_id)
+  #   if category
+  #     category.name
+  #   else
+  #     'no category assigned'
+  #   end
+  # end
 end
