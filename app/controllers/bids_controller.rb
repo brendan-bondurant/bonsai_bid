@@ -2,18 +2,18 @@ class BidsController < ApplicationController
   before_action :set_bid, only: %i[ show edit update destroy ]
 
   # GET /bids or /bids.json
-  def index
-    @bids = Bid.all
-  end
+  # def index
+  #   @bids = Bid.all
+  # end
 
   # GET /bids/1 or /bids/1.json
   def show
   end
 
   # GET /bids/new
-  def new
-    @bid = Bid.new
-  end
+  # def new
+  #   @bid = Bid.new
+  # end
 
   # GET /bids/1/edit
   def edit

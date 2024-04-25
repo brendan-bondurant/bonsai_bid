@@ -1,42 +1,44 @@
-<p>
-  <strong>Item:</strong>
-  <%= @auction.item.name %>
-</p>
+<div class="container mt-3">
+  <p class="alert alert-success"><%= notice %></p>
+  <%= render @auction %>
 
-<p>
-  <strong>Start Date:</strong>
-  <%= @auction.start_date.strftime("%B %d, %Y") %>
-</p>
-
-<p>
-  <strong>End Date:</strong>
-  <%= @auction.end_date.strftime("%B %d, %Y") %>
-</p>
-
-<p>
-  <strong>Starting Price:</strong>
-  <%= @auction.starting_price %>
-</p>
-
-<p>
-  <strong>Current Bid:</strong>
-  <%= @auction.current_highest_bid %>
-</p>
-
-<% if @auction.bidding_open? %>
-  <%= form_with(model: [@auction, @bid]) do |form| %>
-  <div class="field">
-      <% if current_user %>
-    <%= form.hidden_field :bidder_id, value: current_user.id %>
+  <% if current_user&.id == @auction.seller_id %>
+    <%= link_to "Edit this auction", edit_auction_path(@auction), class: "btn btn-primary" %> |
+    <%= link_to "End Auction", auction_path(@auction), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to end this auction?" } %>
   <% end %>
-    <%= form.label :bid_amount %>
-    <%= form.number_field :bid_amount %>
-  </div>
-  <div class="actions">
-    <%= form.submit "Place Bid" %>
-  </div>
-<% end %>
 
-<% else %>
-  <p>Bidding is closed for this auction.</p>
-<% end %>
+  <% if current_user && current_user&.id != @auction.seller_id %>
+    <div class="mb-3">
+      <%= link_to 'Watch this Auction', watchlists_path(auction_id: @auction.id), method: :post, class: "btn btn-info watch-auction-button" %> 
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= link_to "Back to auctions", auctions_path, class: "btn btn-secondary" %>
+  </div>
+
+  <% if current_user && current_user&.id != @auction.seller_id %>
+    <%= form_with model: [ @auction, @inquiry ], url: auction_inquiries_path(@auction), local: true do |form| %>
+      <% if @inquiry.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2><%= pluralize(@inquiry.errors.count, "error") %> prohibited this inquiry from being saved:</h2>
+
+          <ul>
+          <% @inquiry.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :comment %><br>
+        <%= form.text_area :comment %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Post Inquiry", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -2,13 +2,13 @@ class RepliesController < ApplicationController
   before_action :set_parent_object
   before_action :set_reply, only: [:edit, :update, :destroy]
 
-  def index
-    @replies = @parent.replies
-  end
+  # def index
+  #   @replies = @parent.replies
+  # end
   
   def new
 
-    @reply = @parent.replies.build
+    # @reply = @parent.replies.build
   end
   
   def create
@@ -70,7 +70,7 @@ class RepliesController < ApplicationController
         feedback_path(@parent)
       end
     elsif @parent.is_a?(Inquiry)
-      item_path(@parent.item)
+      auction_path(@parent.auction)
     else
       root_path 
     end

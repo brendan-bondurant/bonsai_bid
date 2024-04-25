@@ -1,12 +1,7 @@
-<h1>New item</h1>
-
-<!-- app/views/items/new.html.erb -->
-
-<%= form_with model: @item, local: true do |form| %>
+<%= form_for @item do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
+      <h2><%= pluralize(@item.errors.count, "error") %> prevented this item from being saved:</h2>
       <ul>
       <% @item.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -16,47 +11,43 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :item_name %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :item_description %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
   </div>
 
   <div class="field">
-  <%= form.label :category_id %>
-  <%= form.select :category_id, Category.all.map { |category| [category.name, category.id] }, {}, { id: :item_category_id, include_blank: "Select Category" } %>
-</div>
-
-  <div class="field">
-    <%= form.label :starting_price %>
-    <%= form.text_field :starting_price, id: :item_starting_price %>
-  </div>
-
-    <div>
-    <%= form.label :bid_increment, style: "display: block" %>
-    <%= form.text_field :bid_increment, id: :item_bid_increment %>
-  </div>
-  
-  <div class="field">
-    <%= form.label :buy_it_now_price %>
-    <%= form.text_field :buy_it_now_price, id: :item_buy_it_now_price %>
+    <%= f.label :category_id, "Category" %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: true %>
   </div>
 
   <div class="field">
-    <%= form.label :start_date %>
-    <%= form.datetime_field :start_date, id: :item_start_date %>
+    <%= f.label :images, "Images" %>
+    <%= f.file_field :images, multiple: true, accept: 'image/png,image/gif,image/jpeg' %>
   </div>
 
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.datetime_field :end_date, id: :item_end_date %>
-  </div>
+  <%= f.fields_for :auction do |a| %>
+    <div class="field">
+      <%= a.label :status %>
+      <%= a.select :status, Auction.statuses.keys.map { |status| [status.titleize, status] }, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= a.label :start_date, "Start Time" %>
+      <%= a.datetime_field :start_date %>
+    </div>
+
+    <div class="field">
+      <%= a.label :end_date, "End Time" %>
+      <%= a.datetime_field :end_date %>
+    </div>
+  <% end %>
 
   <div class="actions">
-    <%= form.submit "Create Item" %>
+    <%= f.submit "Create Item and Auction" %>
   </div>
-
 <% end %>

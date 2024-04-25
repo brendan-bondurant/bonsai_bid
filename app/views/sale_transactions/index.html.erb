@@ -5,7 +5,7 @@
   <% @sales.each do |sale| %>
     <div class="transaction sale">
       <p><strong>Transaction ID:</strong> <%= sale.id %></p>
-      <p><strong>Item:</strong> <%= sale.item.name %></p>
+      <p><strong>Item:</strong> <%= sale.auction.item.name %></p>
       <p><strong>Date:</strong> <%= sale.created_at.strftime("%B %d, %Y") %></p>
       <p><strong>Buyer:</strong> <%= sale.buyer.name %></p>
       <p><strong>Final Price:</strong> $<%= sale.final_price %></p>
@@ -18,7 +18,7 @@
   <% @purchases.each do |purchase| %>
     <div class="transaction purchase">
       <p><strong>Transaction ID:</strong> <%= purchase.id %></p>
-      <p><strong>Item:</strong> <%= purchase.item.name %></p>
+      <p><strong>Item:</strong> <%= purchase.auction.item.name %></p>
       <p><strong>Date:</strong> <%= purchase.created_at.strftime("%B %d, %Y") %></p>
       <p><strong>Seller:</strong> <%= purchase.seller.name %></p>
       <p><strong>Final Price:</strong> $<%= purchase.final_price %></p>

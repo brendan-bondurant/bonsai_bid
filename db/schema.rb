@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_19_211205) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
     t.float "bid_increment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["item_id"], name: "index_auctions_on_item_id"
     t.index ["seller_id"], name: "index_auctions_on_seller_id"
   end
@@ -40,14 +41,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.text "description"
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "feedbacks", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.bigint "from_user_id", null: false
     t.bigint "to_user_id", null: false
     t.integer "rating"
@@ -56,8 +55,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
     t.datetime "updated_at", null: false
     t.bigint "sale_transaction_id", null: false
     t.text "reply"
+    t.bigint "auction_id", null: false
+    t.index ["auction_id"], name: "index_feedbacks_on_auction_id"
     t.index ["from_user_id"], name: "index_feedbacks_on_from_user_id"
-    t.index ["item_id"], name: "index_feedbacks_on_item_id"
     t.index ["sale_transaction_id"], name: "index_feedbacks_on_sale_transaction_id"
     t.index ["to_user_id"], name: "index_feedbacks_on_to_user_id"
   end
@@ -65,11 +65,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
   create_table "inquiries", force: :cascade do |t|
     t.bigint "commenter_id"
     t.bigint "seller_id"
-    t.bigint "item_id"
     t.text "comment"
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "auction_id"
+    t.index ["auction_id"], name: "index_inquiries_on_auction_id"
     t.index ["parent_id"], name: "index_inquiries_on_parent_id"
   end
 
@@ -100,13 +101,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
   create_table "sale_transactions", force: :cascade do |t|
     t.bigint "buyer_id"
     t.bigint "seller_id"
-    t.bigint "item_id"
     t.decimal "final_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "payment_status", default: 0, null: false
+    t.bigint "auction_id"
+    t.index ["auction_id"], name: "index_sale_transactions_on_auction_id"
     t.index ["buyer_id"], name: "index_sale_transactions_on_buyer_id"
-    t.index ["item_id"], name: "index_sale_transactions_on_item_id"
     t.index ["seller_id"], name: "index_sale_transactions_on_seller_id"
   end
 
@@ -137,11 +138,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
   end
 
   create_table "watchlists", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["item_id"], name: "index_watchlists_on_item_id"
+    t.bigint "auction_id"
+    t.index ["auction_id"], name: "index_watchlists_on_auction_id"
     t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
@@ -149,17 +150,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_212730) do
   add_foreign_key "auctions", "users", column: "seller_id"
   add_foreign_key "bids", "auctions"
   add_foreign_key "bids", "users", column: "bidder_id"
-  add_foreign_key "feedbacks", "items"
+  add_foreign_key "feedbacks", "auctions"
   add_foreign_key "feedbacks", "sale_transactions"
   add_foreign_key "feedbacks", "users", column: "from_user_id"
   add_foreign_key "feedbacks", "users", column: "to_user_id"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "users", column: "seller_id"
   add_foreign_key "replies", "users"
-  add_foreign_key "sale_transactions", "items"
+  add_foreign_key "sale_transactions", "auctions"
   add_foreign_key "sale_transactions", "users", column: "buyer_id"
   add_foreign_key "sale_transactions", "users", column: "seller_id"
   add_foreign_key "user_profiles", "users", on_delete: :cascade
-  add_foreign_key "watchlists", "items"
+  add_foreign_key "watchlists", "auctions"
   add_foreign_key "watchlists", "users"
 end

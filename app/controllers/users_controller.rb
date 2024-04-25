@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @watchlists = current_user.watchlist_items
+    @watchlists = current_user.watchlist_auctions
   end
 
   def profile
@@ -24,19 +24,18 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def edit
-  end
+
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @user.update(user_params)
+    #     format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @user }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @user.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
 

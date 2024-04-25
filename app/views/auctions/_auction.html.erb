@@ -1,0 +1,39 @@
+<!-- app/views/auctions/_auction.html.erb -->
+<div class="auction-details">
+  <p><strong>Title:</strong> <%= auction.item.name %></p>
+  <p><strong>Start Date:</strong> <%= auction.start_date.strftime("%B %d, %Y") %></p>
+  <p><strong>End Date:</strong> <%= auction.end_date.strftime("%B %d, %Y") %></p>
+  <p><strong>Starting Price:</strong> $<%= auction.starting_price %></p>
+  <p><strong>Current Bid:</strong> $<%= auction.current_highest_bid || 'No bids yet' %></p>
+</div>
+
+<% if auction.inquiries.any? %>
+  <strong>Inquiries:</strong>
+  <% auction.inquiries.each do |inquiry| %>
+    <div class="inquiry">
+              User: <%= User.find(inquiry.commenter_id).email %> <br>
+        Comment: <%= inquiry.comment %> <br>
+    </div>
+
+    <% if inquiry.replies.any? %>
+      <% inquiry.replies.each do |reply| %>
+        <div class="reply">
+                      User: <%= User.find(reply.user_id).email %> <br>
+              Comment: <%= reply.content %> <br>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="reply-form">
+      <%= form_with model: inquiry.replies.build, scope: :reply, url: auction_inquiry_replies_path(auction, inquiry), local: true do |form| %>
+        <div class="field">
+          <%= form.label :content %>
+          <%= form.text_area :content, rows: 2 %>
+        </div>
+        <div class="actions">
+          <%= form.submit "Reply" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

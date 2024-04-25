@@ -6,7 +6,7 @@
 
   <p>
     <strong>Category:</strong>
-    <%= item.category_id %>
+    <%= item.category_name %>
   </p>
 
   <p>
@@ -30,9 +30,9 @@
     <%= item.status %>
   </p>
   <p>
-  <% if item.inquiries.any? %>
+  <% if item.auction.inquiries.any? %>
     <strong>Inquiries:</strong>
-    <% item.inquiries.each do |inquiry| %>
+    <% item.auction.inquiries.each do |inquiry| %>
       <div class="inquiry">
         User: <%= User.find(inquiry.commenter_id).email %> <br>
         Comment: <%= inquiry.comment %> <br>

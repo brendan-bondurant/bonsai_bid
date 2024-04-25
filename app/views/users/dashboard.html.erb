@@ -1,12 +1,13 @@
-<%= @user.name %>'s Dashboard <br>
+<h1><%= @user.name %>'s Dashboard</h1> <br>
 
-items <br>
+<h2>your items</h2>
 <% @user.items.each do |item| %>
     <%= item.name %> <br>
   <% end %>
+  <%= link_to 'New Item', new_item_path %>
 
 
-watchlist <br>
+<h2>watchlist</h2>
 <% @watchlists.each do |watchlist| %>
-        <%= link_to watchlist.name, item_path(watchlist.id) %> <br>
-  <% end %>
+  <%= link_to watchlist.item.name, auction_path(watchlist.id) %> <br>
+<% end %>

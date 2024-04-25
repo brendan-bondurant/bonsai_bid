@@ -4,24 +4,25 @@ class AuctionsController < ApplicationController
 
   # GET /auctions/new
   def new
-    @auction = Auction.new
+    # @auction = Auction.new
   end
 
   # POST /auctions
   def create
-    @auction = Auction.new(auction_params)
-    @auction.seller = current_user  # Assuming seller is the logged-in user
+    # @auction = Auction.new(auction_params)
+    # @auction.seller = current_user  # Assuming seller is the logged-in user
 
-    if @auction.save
-      redirect_to @auction, notice: 'Auction was successfully created.'
-    else
-      render :new
-    end
+    # if @auction.save
+    #   redirect_to @auction, notice: 'Auction was successfully created.'
+    # else
+    #   render :new
+    # end
   end
 
   # GET /auctions/1
   def show
-    @bid = @auction.bids.build 
+    @bid = @auction.bids.build
+    @inquiry = Inquiry.new(auction: @auction)
   end
 
   # Additional actions (edit, update, destroy) can be implemented if needed
@@ -34,6 +35,6 @@ class AuctionsController < ApplicationController
 
     # Only allow a list of trusted parameters through
     def auction_params
-      params.require(:auction).permit(:item_id, :start_date, :end_date, :starting_price, :bid_increment)
+      # params.require(:auction).permit(:item_id, :start_date, :end_date, :starting_price, :bid_increment)
     end
 end

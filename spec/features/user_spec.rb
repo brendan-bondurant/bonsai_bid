@@ -100,4 +100,76 @@ RSpec.feature "Users", type: :feature do
     click_button "Cancel my account"
     expect(page).to have_text("Bye! Your account has been successfully cancelled. We hope to see you again soon.")
   end
+
+  scenario "User views their dashboard with watchlist items" do
+    sign_in test_user
+    FactoryBot.create_list(:watchlist, 4, user: test_user)
+    visit dashboard_user_path(test_user)
+
+    test_user.watchlist_auctions.each do |auction|
+      expect(page).to have_text(auction.item.name)
+    end
+  end
+
+  # scenario "User tries to view their own profile and it has edit link" do
+  #   sign_in test_user
+  #   visit profile_user_path(test_user)
+    
+  #   expect(current_path).to eq(dashboard_user_path(test_user))
+  # end
+    
+  # scenario "User views another user's profile" do
+  #   user1 = create(:user)
+  #   user2 = create(:user)
+  #   # create_sales_and_purchases(user2)  
+    
+  #   sign_in user1
+  #   visit profile_user_path(user2)
+    
+  #   expect(page).to have_text(user2.name)
+  #   expect(page).to have_text("Sales")
+  #   expect(page).to have_text("Purchases")
+  # end
+
+  # scenario "User tries to edit another user's profile unauthorized" do
+  #   user1 = create(:user)
+  #   user2 = create(:user, email: "user2@example.com")
+    
+  #   sign_in user1
+  #   visit edit_user_path(user2)
+    
+  #   expect(current_path).to eq(root_path) 
+  #   expect(page).to have_text("You are not authorized to access this page.")
+  # end
+
+  # scenario "User updates profile with new phone number" do
+  #   sign_in test_user
+  #   visit edit_user_registration_path
+  #   fill_in "Phone", with: "9876543210"
+  #   fill_in "Current password", with: test_user.password
+  #   click_button "Update"
+    
+  #   expect(page).to have_text("Your account has been updated successfully.")
+  #   test_user.reload
+  #   expect(test_user.phone).to eq("9876543210")
+  # end
+    
+  # scenario "User fails to update profile due to server error" do
+  #   allow_any_instance_of(User).to receive(:update).and_raise(StandardError)
+  #   sign_in test_user
+  #   visit edit_user_registration_path
+  #   fill_in "Phone", with: "9876543210"
+  #   fill_in "Current password", with: test_user.password
+  #   click_button "Update"
+    
+  #   expect(page).to have_text("Something went wrong")
+  # end
+    
+  scenario "Check database after user deletes account" do
+    sign_in test_user
+    visit edit_user_registration_path
+    click_button "Cancel my account"
+    
+    expect(User.exists?(test_user.id)).to be_falsey
+  end
 end
