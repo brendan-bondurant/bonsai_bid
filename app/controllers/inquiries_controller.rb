@@ -1,32 +1,36 @@
 class InquiriesController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  before_action :set_item, only: [:create]
+  before_action :set_auction, only: [:create]
 
   def create
-    @inquiry = @item.inquiries.new(inquiry_params)
+    @inquiry = @auction.inquiries.new(inquiry_params)
     @inquiry.commenter = current_user
-    @inquiry.seller_id = @item.seller_id
+    @inquiry.seller_id = @auction.seller_id
     if @inquiry.save
       flash[:notice] = 'Inquiry posted successfully.'
-      redirect_to item_path(@item)
+      redirect_to auction_path(@auction)
     else
-      set_item
+      set_auction
       flash.now[:alert] = "Comment can't be blank"
-      render 'items/show', status: :unprocessable_entity
+      render 'auctions/show', status: :unprocessable_entity
     end
   end
 
+
+
+  def index
+  end
+
   def show
-    
   end
 
   private
 
-  def set_item
-    @item = Item.find(params[:item_id])
+  def set_auction
+    @auction = Auction.find(params[:auction_id])
   rescue ActiveRecord::RecordNotFound
-    flash[:alert] = 'Item not found.'
-    redirect_to items_path
+    flash[:alert] = 'auction not found.'
+    redirect_to auctions_path
   end
 
   def inquiry_params

@@ -9,6 +9,7 @@ RSpec.feature 'Auction Inquiry and Support', type: :feature do
   scenario 'Buyer communicates with seller on an auction listing' do
     sign_in buyer
     visit auction_path(auction)
+    
     fill_in 'Comment', with: 'Can you provide more details about the condition?'
     click_button 'Post Inquiry'
     expect(page).to have_content('Inquiry posted successfully.')

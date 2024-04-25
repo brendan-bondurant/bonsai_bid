@@ -8,7 +8,7 @@ class RepliesController < ApplicationController
   
   def new
 
-    @reply = @parent.replies.build
+    # @reply = @parent.replies.build
   end
   
   def create
@@ -70,7 +70,7 @@ class RepliesController < ApplicationController
         feedback_path(@parent)
       end
     elsif @parent.is_a?(Inquiry)
-      item_path(@parent.item)
+      auction_path(@parent.auction)
     else
       root_path 
     end
