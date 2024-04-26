@@ -46,9 +46,9 @@ class RepliesController < ApplicationController
   private
 
   def set_parent_object
+    @sale_transaction = SaleTransaction.find(params[:sale_transaction_id]) if params[:sale_transaction_id]
     if params[:feedback_id]
       @parent = Feedback.find(params[:feedback_id])
-      @sale_transaction = SaleTransaction.find(params[:sale_transaction_id]) if params[:sale_transaction_id]
     elsif params[:inquiry_id]
       @parent = Inquiry.find(params[:inquiry_id])
     end
@@ -66,13 +66,9 @@ class RepliesController < ApplicationController
     if @parent.is_a?(Feedback)
       if @sale_transaction
         sale_transaction_feedback_path(@sale_transaction, @parent)
-      else
-        feedback_path(@parent)
       end
-    elsif @parent.is_a?(Inquiry)
+    else @parent.is_a?(Inquiry)
       auction_path(@parent.auction)
-    else
-      root_path 
     end
   end
 end
