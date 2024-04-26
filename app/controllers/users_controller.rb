@@ -16,8 +16,8 @@ class UsersController < ApplicationController
   def profile
     if current_user.id != params[:id]
     @other_user = User.includes(sales: :feedbacks, purchases: :feedbacks).find(params[:id])
-    else
-      redirect_to user_dashboard_path
+    # else
+    #   redirect_to user_dashboard_path
     end
   end
 
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :street, :phone)
-    end
+    # def user_params
+    #   params.require(:user).permit(:email, :password, :password_confirmation, :name, :street, :phone)
+    # end
 end
