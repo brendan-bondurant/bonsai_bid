@@ -7,6 +7,10 @@
       From: <%= feedback.from_user.name %> <br>
       Rating: <%= feedback.rating %> <br>
       <%= feedback.comment %> <br>
+      <% if current_user.id == feedback.from_user_id %>
+            <%= link_to 'Edit Feedback', edit_feedback_path(feedback.id), class: 'edit-feedback-link' %>
+            <%= link_to 'Delete Feedback', feedback_path(feedback.id), method: :delete, class: 'delete-feedback-link' %>
+      <% end %>
     <% end %>
   <% end %>
 <% else %>

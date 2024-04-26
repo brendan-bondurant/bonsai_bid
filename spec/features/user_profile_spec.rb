@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "UserProfiles", type: :feature do
   let!(:user) { create(:user) }
+  let!(:second_user) { create(:user) }
   let!(:user_profile) { create(:user_profile, user: user) } 
+  let!(:second_user_profile) { create(:user_profile, user: second_user) } 
 
   before do
     sign_in user
@@ -10,10 +12,15 @@ RSpec.feature "UserProfiles", type: :feature do
 
   scenario "User views their profile" do
     visit user_profile_path(user_profile) 
-
     expect(page).to have_text(user_profile.name)
     expect(page).to have_text(user_profile.phone)
-    
+  end
+
+  scenario "User views another user's profile" do
+    visit user_profile_path(second_user_profile)
+    expect(page).to have_text(second_user_profile.name)
+    expect(page).to have_text(second_user_profile.phone)  
+    expect(current_path).to eq(user_profile_path(second_user_profile))
   end
 
   scenario "User updates their profile with valid information" do

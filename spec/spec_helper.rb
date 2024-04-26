@@ -28,7 +28,6 @@ def user_with_items
     description: "Bonsai bush",
     category: category,
     seller: @user,
-    status: 'listed',
   )
 
   @item2 = Item.create!(
@@ -36,7 +35,6 @@ def user_with_items
     description: "Book about stuff",
     category: category,
     seller: @user,
-    status: 'listed',
   )
 
   @item3 = Item.create!(
@@ -44,7 +42,6 @@ def user_with_items
     description: "Bonsai Tree",
     category: category,
     seller: @user,
-    status: 'listed',
   )
   
 end

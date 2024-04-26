@@ -8,7 +8,7 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks/1 or /feedbacks/1.json
   def show
-    @sale_transaction = SaleTransaction.find(params[:sale_transaction_id])
+    @sale_transaction = SaleTransaction.find(@feedback.sale_transaction_id)
   end
 
   # GET /feedbacks/new
@@ -41,6 +41,7 @@ class FeedbacksController < ApplicationController
         format.html { redirect_to feedback_url(@feedback), notice: "Feedback was successfully updated." }
         format.json { render :show, status: :ok, location: @feedback }
       else
+        @feedback.reload
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @feedback.errors, status: :unprocessable_entity }
       end
@@ -50,7 +51,6 @@ class FeedbacksController < ApplicationController
   # DELETE /feedbacks/1 or /feedbacks/1.json
   def destroy
     @feedback.destroy!
-
     respond_to do |format|
       format.html { redirect_to feedbacks_url, notice: "Feedback was successfully destroyed." }
       format.json { head :no_content }

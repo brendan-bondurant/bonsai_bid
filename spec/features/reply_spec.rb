@@ -54,5 +54,28 @@ RSpec.feature 'Feedback Reply Management', type: :feature do
     expect(page).to have_content('Reply was successfully deleted.')
     expect(page).not_to have_content("Initial reply content")
   end
+
+  scenario 'Attempt to create an empty reply' do
+    sign_in seller
+    visit sale_transaction_feedback_path(sale_transaction, feedback)
+    fill_in 'Reply', with: ''
+    click_button 'Post Reply'
+    
+    expect(page).to have_content('error prohibited this reply from being saved') 
+    expect(page).to have_content("Content can't be blank") 
+    expect(page).to have_selector('form') 
+  end
+
+  scenario 'Attempt to update a reply with empty content' do
+    sign_in seller
+    visit edit_sale_transaction_feedback_reply_path(sale_transaction, feedback, reply)
+    
+    fill_in 'Edit Reply', with: ''
+    click_button 'Update Reply'
+
+    expect(page).to have_content('error prohibited this reply from being saved') 
+    expect(page).to have_content("Content can't be blank") 
+    expect(page).to have_selector('form') 
+  end
 end
 
