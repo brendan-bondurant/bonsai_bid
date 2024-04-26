@@ -12,7 +12,6 @@ RSpec.feature "UserProfiles", type: :feature do
 
   scenario "User views their profile" do
     visit user_profile_path(user_profile) 
-save_and_open_page
     expect(page).to have_text(user_profile.name)
     expect(page).to have_text(user_profile.phone)
   end
