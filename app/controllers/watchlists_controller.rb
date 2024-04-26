@@ -18,17 +18,12 @@ class WatchlistsController < ApplicationController
 
 
   def create
-    # @watchlist = current_user.watchlists.build(watchlist_params)
-    @watchlist = Watchlist.new(user_id: current_user.id, auction_id: params[:auction_id])
+    @watchlist = current_user.watchlists.build(watchlist_params)
     respond_to do |format|
-    
-    
-    if @watchlist.save
-      format.html { redirect_to dashboard_user_path(current_user.id), notice: "Item successfully added to your watchlist" }
-      format.json { render :show, status: :created, location: @watchlist }
-      
-    else
-
+      if @watchlist.save 
+        format.html { redirect_to dashboard_user_path(current_user.id), notice: "Item successfully added to your watchlist" }
+        format.json { render :show, status: :created, location: @watchlist }
+      else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @watchlist.errors, status: :unprocessable_entity }
       end
@@ -60,12 +55,12 @@ class WatchlistsController < ApplicationController
 
   private
 
-    def set_watchlist
-      @watchlist = Watchlist.find(params[:id])
-    end
+  def set_watchlist
+    @watchlist = Watchlist.find(params[:id])
+  end
 
-    def watchlist_params
-      params.require(:watchlists).permit(:auction_id)
-    end
-
+  def watchlist_params
+    auction_id = params.dig(:watchlist, :auction_id) || params[:auction_id]
+    { auction_id: auction_id, user_id: current_user.id }
+  end
 end
