@@ -1,4 +1,4 @@
-As of May 23, this code is deprecated. This will be connected to the new repository via the Bonsai Bid organization, but I have left this up for presentation purposes. The MVP repo will be connected to this through the organization by May 26, 2024
+As of May 23, this code is not being used. This will be connected to the new repository via the Bonsai Bid organization, but I have left this up for presentation purposes. The MVP repo will be connected to this through the organization by May 26, 2024
 
 <div align="center">
 <h1> Bonsai Bid </h1>
