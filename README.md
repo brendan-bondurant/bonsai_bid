@@ -1,4 +1,4 @@
-As of May 23, this code is not being used. This will be connected to the new repository via the Bonsai Bid organization, but I have left this up for presentation purposes. The MVP repo will be connected to this through the organization by June 8, 2024
+As of May 23, this code is not being used. This repo started as kind of a sketch pad for myself and grew from there. Now that we are nearing deployment, I have set up another repo that is actually for deployment and production. This will be connected to the new repository via the Bonsai Bid organization, but I have left this up for presentation purposes. I will try to get this connected to the production repo by the end of June
 
 <div align="center">
 <h1> Bonsai Bid </h1>
